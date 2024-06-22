@@ -15,10 +15,10 @@ export class UsuarioEntity{
     @Column({name:'senha', length:255, nullable:false})
     senha:string;
     
-    @Column({name:'rg', length:10, nullable:false})
+    @Column({name:'rg', length:11, nullable:false})
     rg:string;
     
-    @Column({name:'cpf', length:11, nullable:false})
+    @Column({name:'cpf', length:14, nullable:false})
     cpf:string;
     
     @Column({name:'rua', length:50, nullable:false})

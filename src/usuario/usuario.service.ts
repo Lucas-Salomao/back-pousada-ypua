@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { ShowUsuarioDTO } from "./dto/showUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
 import { Repository } from "typeorm";
+import { UpdateUsuarioDTO } from "./dto/updateUsuario.dto";
 
 @Injectable()
 export class UsuarioService{
@@ -11,7 +12,12 @@ export class UsuarioService{
         private readonly usuarioRepository: Repository<UsuarioEntity>
     ) {}
 
-    async showUsuario(){
+    async createUsuario(usuarioEntity: UsuarioEntity){
+        const usuarioCreated= await this.usuarioRepository.save(usuarioEntity);
+        console.log(usuarioCreated);
+    }
+
+    async readUsuario(){
         const usuariosSalvos = await this.usuarioRepository.find();
         const usuariosLista=usuariosSalvos.map(
             (usuario)=> new ShowUsuarioDTO(usuario.id,usuario.nome)
@@ -19,4 +25,16 @@ export class UsuarioService{
 
         return usuariosLista;
     }
+
+    async updateUsuario(id:string, usuarioEntity:UpdateUsuarioDTO){
+        await this.usuarioRepository.update(id,usuarioEntity);
+
+    }
+
+    async deleteUsuario(id:string){
+        await this.usuarioRepository.delete(id);
+
+    }
+
+    
 }

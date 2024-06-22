@@ -1,15 +1,16 @@
-import {Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { UsuarioEntity } from "./usuario.entity";
+import { EntityRepository, Repository } from 'typeorm';
 
 @Injectable()
 export class UsuarioRepository{
     private usuarios : UsuarioEntity[]=[];
 
-    async saveUsuario(usuario: UsuarioEntity){
+    async createUsuario(usuario: UsuarioEntity){
         this.usuarios.push(usuario);
     }
 
-    async getUsuario()
+    async readUsuario()
     {
         return this.usuarios;
     }
@@ -57,7 +58,13 @@ export class UsuarioRepository{
 
     async updateUsuario(id:string, dadosDeAtualizacao:Partial<UsuarioEntity>)
     {
-        const usuario = this.searchByID(id);
+        const usuario = this.usuarios.find(
+            usuarioSalvo=>usuarioSalvo.id === id
+        );
+
+        if(!usuario){
+            throw new Error('Usuário não existe!');
+        }
 
         Object.entries(dadosDeAtualizacao).forEach(([chave,valor])=>{
             if(chave==='id')

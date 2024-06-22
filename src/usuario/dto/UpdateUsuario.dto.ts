@@ -3,6 +3,11 @@ import { EmailIsUnique } from "../validator/email-is-unique.validator";
 import { RGIsUnique } from "../validator/rg-is-unique.validator";
 
 export class UpdateUsuarioDTO{
+    
+    constructor(
+        readonly id:string,
+    ){}
+    
     @IsString()
     @IsOptional()
     nome:string;

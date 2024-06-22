@@ -12,7 +12,7 @@ export class CreateUsuarioDTO{
     @EmailIsUnique({message:'Ja existe um usuario com este e-mail'})
     email:string;
 
-    @MinLength(8)
+    @MinLength(8, {message:'Ja existe um usuario com este e-mail'})
     @IsNotEmpty()
     senha:string;
     

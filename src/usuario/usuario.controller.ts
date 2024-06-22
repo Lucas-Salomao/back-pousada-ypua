@@ -5,16 +5,22 @@ import { UsuarioEntity } from "./usuario.entity";
 import { v4 as uuid} from 'uuid'
 import { ShowUsuarioDTO } from "./dto/showUsuario.dto";
 import { UpdateUsuarioDTO } from "./dto/updateUsuario.dto";
+import { UsuarioService } from "./usuario.service";
 
 @Controller('/usuarios')
 export class UsuarioController{
 
-    constructor(private usuarioRepository: UsuarioRepository) {}
+    constructor(
+        private usuarioRepository: UsuarioRepository,
+        private usuarioService: UsuarioService
+
+    ) {}
 
     @Post()
     async createUsuario(@Body() dadosUsuario:CreateUsuarioDTO)
     {
         const usuarioEntity = new UsuarioEntity();
+        usuarioEntity.id=uuid();
         usuarioEntity.nome=dadosUsuario.nome;
         usuarioEntity.email=dadosUsuario.email;
         usuarioEntity.senha=dadosUsuario.senha;
@@ -29,7 +35,7 @@ export class UsuarioController{
         usuarioEntity.pais=dadosUsuario.pais;
         usuarioEntity.role=dadosUsuario.role;
 
-        this.usuarioRepository.saveUsuario(usuarioEntity);
+        this.usuarioService.createUsuario(usuarioEntity);
         return {
             usuario: new ShowUsuarioDTO(usuarioEntity.id, usuarioEntity.nome),
             message:'usuario criado com sucesso!'
@@ -37,24 +43,18 @@ export class UsuarioController{
     }
 
     @Get()
-    async getUsuario(){
-        const usuariosSalvos = await this.usuarioRepository.getUsuario();
-        const usuariosLista = usuariosSalvos.map(
-            usuario=> new ShowUsuarioDTO(
-                usuario.id,
-                usuario.nome
-            )
-        );
-        return usuariosLista;
+    async readUsuario(){
+        const usuariosSalvos=await this.usuarioService.readUsuario();        
+        return usuariosSalvos;
     }
 
     @Put('/:id')
     async updateUsuario(@Param('id') id:string, @Body() dadosUsuario:UpdateUsuarioDTO)
     {
-        const usuarioAtualizado=await this.usuarioRepository.updateUsuario(id, dadosUsuario);
+        const usuarioAtualizado=await this.usuarioService.updateUsuario(id, dadosUsuario);
 
         return {
-            usuario: new ShowUsuarioDTO(usuarioAtualizado.id, usuarioAtualizado.nome),
+            usuario: usuarioAtualizado,
             message:'usuario atualizado com sucesso!'
         }
     }
@@ -62,10 +62,10 @@ export class UsuarioController{
     @Delete('/:id')
     async deleteUsuario(@Param('id') id: string)
     {
-        const usuarioDeleted = await this.usuarioRepository.deleteUsuario(id);
+        const usuarioDeleted = await this.usuarioService.deleteUsuario(id);
 
         return{
-            usuario: new ShowUsuarioDTO(usuarioDeleted.id, usuarioDeleted.nome),
+            usuario: usuarioDeleted,
             message:'usuario removido com sucesso!'
         }
     }

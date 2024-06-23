@@ -4,6 +4,7 @@ import { AcomodacaoService } from './acomodacao.service';
 import { UpdateAcomodacaoDTO } from './dto/UpdateAcomodacao.dto';
 import { CreateAcomodacaoDTO } from './dto/CreateAcomodacao.dto';
 import { AcomodacaoEntity } from './acomodacao.entity';
+import { v4 as uuid} from 'uuid';
 
 @Controller('/acomodacao')
 export class AcomodacaoController {
@@ -77,8 +78,5 @@ export class AcomodacaoController {
             message: 'acomodacao removida com sucesso!'
         }
     }
-}
-function uuid(): string {
-    throw new Error('Function not implemented.');
 }
 

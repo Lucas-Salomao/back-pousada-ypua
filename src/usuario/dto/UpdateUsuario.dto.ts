@@ -33,7 +33,7 @@ export class UpdateUsuarioDTO{
     rua:string;
 
     @IsOptional()
-    numero:string;
+    numero:number;
     
     @IsOptional()
     complemento:string;

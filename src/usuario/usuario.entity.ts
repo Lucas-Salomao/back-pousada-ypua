@@ -24,8 +24,8 @@ export class UsuarioEntity{
     @Column({name:'rua', length:50, nullable:false})
     rua:string;
     
-    @Column({name:'numero', length:5, nullable:false})
-    numero:string;
+    @Column({name:'numero', type:`int`, nullable:false})
+    numero:number;
     
     @Column({name:'complemento', length:30, nullable:true})
     complemento:string;

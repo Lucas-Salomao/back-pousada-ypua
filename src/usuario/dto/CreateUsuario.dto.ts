@@ -28,7 +28,7 @@ export class CreateUsuarioDTO{
     rua:string;
 
     @IsNotEmpty()
-    numero:string;
+    numero:number;
 
     @IsOptional()
     complemento:string;

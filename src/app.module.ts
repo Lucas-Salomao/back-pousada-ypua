@@ -10,6 +10,7 @@ import { ReservaController } from './reserva/reserva.controller';
 import { ReservaModule } from './reserva/reserva.module';
 import { HospedeModule } from './hospede/hospede.module';
 import { AcomodacaoModule } from './acomodacao/acomodacao.module';
+import { AcomodacaoController } from './acomodacao/acomodacao.controller';
 
 
 @Module({
@@ -25,8 +26,9 @@ import { AcomodacaoModule } from './acomodacao/acomodacao.module';
     ReservaModule,
     HospedeModule,
     AcomodacaoModule,
+    UsuarioModule,
   ],
-  controllers: [AppController, HospedeController, ReservaController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

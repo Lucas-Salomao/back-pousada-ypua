@@ -4,7 +4,7 @@ import { AcomodacaoRepository } from "../acomodacao.repository";
 
 @Injectable()
 @ValidatorConstraint({async:true})
-export class NumberUniqueValidator implements ValidatorConstraintInterface{
+export class NumberIsUniqueValidator implements ValidatorConstraintInterface{
     
     constructor(private acomodacaoRepository:AcomodacaoRepository){}
 
@@ -22,7 +22,7 @@ export const NumberIsUnique = (opcoesDeValidacao:ValidationOptions)=>{
             propertyName:propriedade,
             options:opcoesDeValidacao,
             constraints:[],
-            validator:NumberUniqueValidator
+            validator:NumberIsUniqueValidator
         })
     }
 }

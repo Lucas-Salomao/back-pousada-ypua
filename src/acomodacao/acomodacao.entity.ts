@@ -10,7 +10,7 @@ export class AcomodacaoEntity {
     @Column({ name: 'nome', length: 20, nullable: false })
     nome: string;
 
-    @Column({ name: 'numero', length: 20, nullable: false, type: 'int' })
+    @Column({ name: 'numero', nullable: false, type: 'int' })
     numero: number;
 
     @Column({ name: 'categoria', length: 20, nullable: false })

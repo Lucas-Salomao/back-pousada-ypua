@@ -13,8 +13,7 @@ export class UsuarioService{
     ) {}
 
     async createUsuario(usuarioEntity: UsuarioEntity){
-        const usuarioCreated= await this.usuarioRepository.save(usuarioEntity);
-        console.log(usuarioCreated);
+        await this.usuarioRepository.save(usuarioEntity);
     }
 
     async readUsuario(){

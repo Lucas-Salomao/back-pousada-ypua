@@ -15,7 +15,7 @@ export class UsuarioEntity{
     @Column({name:'senha', length:255, nullable:false})
     senha:string;
     
-    @Column({name:'rg', length:11, nullable:false})
+    @Column({name:'rg', length:12, nullable:false})
     rg:string;
     
     @Column({name:'cpf', length:14, nullable:false})
@@ -42,7 +42,7 @@ export class UsuarioEntity{
     @Column({name:'pais', length:20, nullable:false})
     pais:string;
     
-    @Column({name:'role', length:10, nullable:false})
+    @Column({name:'role', length:20, nullable:false})
     role:string;
 
     @CreateDateColumn({name:'created_at'})

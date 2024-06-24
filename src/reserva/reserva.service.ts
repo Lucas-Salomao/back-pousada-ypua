@@ -38,13 +38,31 @@ export class ReservaService {
   }
 
   async readReserva() {
-    const hospedesSalvos = await this.reservaRepository.find();
-    return hospedesSalvos;
+    const reservasSalvos = await this.reservaRepository.find();
+    return reservasSalvos;
+  }
+
+  async readReservaByCode(codigo: string) {
+    const reserva = await this.reservaRepository.findOneBy({ codigo });
+    return reserva;
   }
 
   async updateReserva(id: string, hospedeEntity: UpdateReservaDTO) {
     await this.reservaRepository.update(id, hospedeEntity);
 
+  }
+
+  async updateReservaByCode(codigo: string, updateReservaDTO: UpdateReservaDTO) {
+    const reserva = await this.reservaRepository.findOneBy({ codigo });
+    if (!reserva) {
+      throw new Error(`Reserva com código ${codigo} não encontrada`);
+    }
+
+    // Use o método update do TypeORM para atualizar os campos da reserva
+    await this.reservaRepository.update(reserva.id, updateReservaDTO);
+
+    // Retorne a reserva atualizada
+    return await this.reservaRepository.findOneBy({ codigo });
   }
 
   async deleteReserva(id: string) {
@@ -53,7 +71,13 @@ export class ReservaService {
   }
 
   async deleteReservaByCode(codigo: string) {
-    const possivelReserva = this.reservasRepository.searchByCode(codigo);
-    this.reservaRepository.delete(possivelReserva.id)
+    const reserva = await this.reservaRepository.findOneBy({ codigo });
+
+    if (!reserva) {
+      throw new Error(`Reserva com código ${codigo} não encontrada`);
+    }
+
+    // Exclua a reserva do banco de dados
+    await this.reservaRepository.delete(reserva.id);
   }
 }

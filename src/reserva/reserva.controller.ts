@@ -6,45 +6,43 @@ import { ReservaEntity } from './reserva.entity';
 
 @Controller('/reserva')
 export class ReservaController {
-  constructor(private readonly reservaService: ReservaService) {}
+  constructor(private readonly reservaService: ReservaService) { }
 
   @Post()
   async createReserva(
-    @Query('hospedeId')hospedeId:string,
-    @Body()dadosReserva:CreateReservaDTO
-  ){
+    @Query('hospedeId') hospedeId: string,
+    @Body() dadosReserva: CreateReservaDTO
+  ) {
     const reservaEntity = new ReservaEntity();
     const reservaCriada = await this.reservaService.createReserva(
-      hospedeId,reservaEntity
+      hospedeId, reservaEntity
     )
     return reservaCriada;
   }
 
   @Get()
-    async readReserva(){
-        const reservasSalvos=await this.reservaService.readReserva();        
-        return reservasSalvos;
+  async readReserva() {
+    const reservasSalvos = await this.reservaService.readReserva();
+    return reservasSalvos;
+  }
+
+  @Put('/:id')
+  async updateReserva(@Param('id') id: string, @Body() dadosReserva: UpdateReservaDTO) {
+    const reservaAtualizado = await this.reservaService.updateReserva(id, dadosReserva);
+
+    return {
+      usuario: reservaAtualizado,
+      message: 'reserva atualizada com sucesso!'
     }
+  }
 
-    @Put('/:id')
-    async updateReserva(@Param('id') id:string, @Body() dadosReserva:UpdateReservaDTO)
-    {
-        const reservaAtualizado=await this.reservaService.updateReserva(id, dadosReserva);
+  @Delete('/:id')
+  async deleteReserva(@Param('id') id: string) {
+    const reservaDeleted = await this.reservaService.deleteReserva(id);
 
-        return {
-            usuario: reservaAtualizado,
-            message:'reserva atualizada com sucesso!'
-        }
+    return {
+      usuario: reservaDeleted,
+      message: 'reserva removida com sucesso!'
     }
-
-    @Delete('/:id')
-    async deleteReserva(@Param('id') id: string)
-    {
-        const reservaDeleted = await this.reservaService.deleteReserva(id);
-
-        return{
-            usuario: reservaDeleted,
-            message:'reserva removida com sucesso!'
-        }
-    }
+  }
 }

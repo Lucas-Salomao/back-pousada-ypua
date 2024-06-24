@@ -36,7 +36,4 @@ export class CreateHospedeDTO {
 
     @IsNotEmpty()
     pais: string;
-
-    @IsNotEmpty()
-    role: string;
 }

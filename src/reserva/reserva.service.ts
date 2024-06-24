@@ -6,7 +6,7 @@ import { HospedeEntity } from 'src/hospede/hospede.entity';
 import { HotelCodeGeneratorService } from './hotel-code-generator.service';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { UpdateReservaDTO } from './dto/update-reserva.dto';
-import { ReservaRepository } from './reserva.repository';
+import { CreateReservaDTO } from './dto/create-reserva.dto';
 
 @Injectable()
 export class ReservaService {
@@ -17,16 +17,15 @@ export class ReservaService {
     @InjectRepository(HospedeEntity)
     private readonly usuarioRepository: Repository<UsuarioEntity>,
     private readonly hotelCodeGeneratorService: HotelCodeGeneratorService,
-    private reservasRepository: ReservaRepository,
   ) { }
 
-  async createReserva(usuarioId: string, dadosReserva: ReservaEntity) {
+  async createReserva(usuarioId: string, dadosReserva: CreateReservaDTO) {
     const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId })
     const reservaEntity = new ReservaEntity();
 
     reservaEntity.codigo = this.hotelCodeGeneratorService.generateCode();
     reservaEntity.dataEntrada = dadosReserva.dataEntrada;
-    reservaEntity.dataSaida = dadosReserva.dataSaida
+    reservaEntity.dataSaida = dadosReserva.dataSaida;
     reservaEntity.status = dadosReserva.status;
     reservaEntity.usuario = usuario;
     reservaEntity.valorTotal = dadosReserva.valorTotal;

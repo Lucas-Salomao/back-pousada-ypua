@@ -9,14 +9,11 @@ export class ReservaController {
   constructor(private readonly reservaService: ReservaService) { }
 
   @Post()
-  async createReserva(
-    @Query('hospedeId') hospedeId: string,
-    @Body() dadosReserva: CreateReservaDTO
-  ) {
-    const reservaEntity = new ReservaEntity();
+  async createReserva(@Body() createReservaDTO: CreateReservaDTO) {
     const reservaCriada = await this.reservaService.createReserva(
-      hospedeId, reservaEntity
-    )
+      createReservaDTO.usuarioId, // Extraia o usuarioId do corpo da requisição
+      createReservaDTO, // Passe o CreateReservaDTO inteiro para o service
+    );
     return reservaCriada;
   }
 

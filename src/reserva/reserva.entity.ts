@@ -1,6 +1,7 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
 import { StatusReserva } from './enum/StatusReserva.enum';
 import { HospedeEntity } from '../hospede/hospede.entity';
+import { UsuarioEntity } from '../usuario/usuario.entity';
 
 @Entity({name: 'reservas'})
 export class ReservaEntity{
@@ -32,6 +33,6 @@ export class ReservaEntity{
     @DeleteDateColumn({name: 'deleted_at'})
     deletedAt:string;
 
-    @ManyToOne(()=>HospedeEntity, (hospede)=>hospede.reservas)
-    hospede:HospedeEntity
+    @ManyToOne(()=>UsuarioEntity, (usuario)=>usuario.reservas)
+    usuario:UsuarioEntity
 }

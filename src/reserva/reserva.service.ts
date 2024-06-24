@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateReservaDto } from './dto/create-reserva.dto';
-import { UpdateReservaDto } from './dto/update-reserva.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ReservaEntity } from './reserva.entity';
 import { Repository } from 'typeorm';
 import { HospedeEntity } from 'src/hospede/hospede.entity';
 import { HotelCodeGeneratorService } from './hotel-code-generator.service';
-import { StatusReserva } from './enum/StatusReserva.enum';
+import { UsuarioEntity } from '../usuario/usuario.entity';
+import { UpdateReservaDTO } from './dto/update-reserva.dto';
+import { ReservaRepository } from './reserva.repository';
 
 @Injectable()
 export class ReservaService {
@@ -15,21 +15,45 @@ export class ReservaService {
     @InjectRepository(ReservaEntity)
     private readonly reservaRepository: Repository<ReservaEntity>,
     @InjectRepository(HospedeEntity)
-    private readonly hospedeRepository: Repository<HospedeEntity>,
-    private readonly hotelCodeGeneratorService: HotelCodeGeneratorService
+    private readonly usuarioRepository: Repository<UsuarioEntity>,
+    private readonly hotelCodeGeneratorService: HotelCodeGeneratorService,
+    private reservasRepository: ReservaRepository,
   ) { }
 
-  async createReserva(hospedeId:string){
-    const hospede = await this.hospedeRepository.findOneBy({id:hospedeId})
+  async createReserva(usuarioId: string, dadosReserva: ReservaEntity) {
+    const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId })
     const reservaEntity = new ReservaEntity();
 
-    reservaEntity.codigo=this.hotelCodeGeneratorService.generateCode();
-    reservaEntity.dataEntrada='23/06/2024';
-    reservaEntity.dataSaida='27/06/2024';
-    reservaEntity.status=StatusReserva.EM_PROCESSAMENTO;
-    reservaEntity.hospede=hospede;
+    reservaEntity.codigo = this.hotelCodeGeneratorService.generateCode();
+    reservaEntity.dataEntrada = dadosReserva.dataEntrada;
+    reservaEntity.dataSaida = dadosReserva.dataSaida
+    reservaEntity.status = dadosReserva.status;
+    reservaEntity.usuario = usuario;
+    reservaEntity.valorTotal = dadosReserva.valorTotal;
 
-    const reservaCriado=await this.hospedeRepository.save(reservaEntity);
+    console.log(reservaEntity);
+
+    const reservaCriado = await this.reservaRepository.save(reservaEntity);
     return reservaCriado;
+  }
+
+  async readReserva() {
+    const hospedesSalvos = await this.reservaRepository.find();
+    return hospedesSalvos;
+  }
+
+  async updateReserva(id: string, hospedeEntity: UpdateReservaDTO) {
+    await this.reservaRepository.update(id, hospedeEntity);
+
+  }
+
+  async deleteReserva(id: string) {
+    await this.reservaRepository.delete(id);
+
+  }
+
+  async deleteReservaByCode(codigo: string) {
+    const possivelReserva = this.reservasRepository.searchByCode(codigo);
+    this.reservaRepository.delete(possivelReserva.id)
   }
 }

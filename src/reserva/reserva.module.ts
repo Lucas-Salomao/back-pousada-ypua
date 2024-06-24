@@ -5,10 +5,11 @@ import { ReservaEntity } from './reserva.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HotelCodeGeneratorService } from './hotel-code-generator.service';
 import { HospedeEntity } from '../hospede/hospede.entity';
+import { ReservaRepository } from './reserva.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ReservaEntity,HospedeEntity])],
   controllers: [ReservaController],
-  providers: [ReservaService,HotelCodeGeneratorService],
+  providers: [ReservaService,HotelCodeGeneratorService,ReservaRepository],
 })
 export class ReservaModule {}

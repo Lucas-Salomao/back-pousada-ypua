@@ -1,1 +1,4 @@
-export class CreateReservaDto {}
+export class CreateReservaDTO {
+
+    
+}

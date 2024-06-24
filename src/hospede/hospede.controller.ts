@@ -1,34 +1,56 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { HospedeService } from './hospede.service';
-import { CreateHospedeDto } from './dto/create-hospede.dto';
-import { UpdateHospedeDto } from './dto/update-hospede.dto';
+import { UpdateHospedeDTO } from './dto/update-hospede.dto';
+import { CreateHospedeDTO } from './dto/create-hospede.dto';
+import { HospedeEntity } from './hospede.entity';
+import { v4 as uuid} from 'uuid'
 
 @Controller('/hospede')
 export class HospedeController {
-  constructor(private readonly hospedeService: HospedeService) {}
+  constructor(
+    private readonly hospedeService: HospedeService
+  ) { }
 
   @Post()
-  create(@Body() createHospedeDto: CreateHospedeDto) {
-    return this.hospedeService.create(createHospedeDto);
+  async createHospede(@Body() dadosHospede: CreateHospedeDTO) {
+    const hospedeEntity=new HospedeEntity();
+    hospedeEntity.id=uuid();
+    hospedeEntity.nome=dadosHospede.nome;
+    hospedeEntity.email=dadosHospede.email;
+    hospedeEntity.cpf=dadosHospede.cpf;
+    hospedeEntity.rg=dadosHospede.rg;
+    hospedeEntity.rua=dadosHospede.rua;
+    hospedeEntity.numero=dadosHospede.numero;
+    hospedeEntity.complemento=dadosHospede.complemento;
+    hospedeEntity.bairro=dadosHospede.bairro;
+    hospedeEntity.cidade=dadosHospede.cidade;
+    hospedeEntity.estado=dadosHospede.estado;
+    hospedeEntity.pais=dadosHospede.pais;
   }
 
   @Get()
-  findAll() {
-    return this.hospedeService.findAll();
+  async readHospede() {
+    const hospedesSalvos = await this.hospedeService.readHospede();
+    return hospedesSalvos;
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.hospedeService.findOne(+id);
+  @Put('/:id')
+  async updateHospede(@Param('id') id: string, @Body() dadosHospede: UpdateHospedeDTO) {
+    const hospedeAtualizado = await this.hospedeService.updateHospede(id, dadosHospede);
+
+    return {
+      usuario: hospedeAtualizado,
+      message: 'usuario atualizado com sucesso!'
+    }
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateHospedeDto: UpdateHospedeDto) {
-    return this.hospedeService.update(+id, updateHospedeDto);
-  }
+  @Delete('/:id')
+  async deleteHospede(@Param('id') id: string) {
+    const hospedeDeleted = await this.hospedeService.deleteHospede(id);
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.hospedeService.remove(+id);
+    return {
+      usuario: hospedeDeleted,
+      message: 'usuario removido com sucesso!'
+    }
   }
 }

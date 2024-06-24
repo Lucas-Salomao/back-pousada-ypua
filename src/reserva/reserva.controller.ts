@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ReservaService } from './reserva.service';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
@@ -8,27 +8,12 @@ export class ReservaController {
   constructor(private readonly reservaService: ReservaService) {}
 
   @Post()
-  create(@Body() createReservaDto: CreateReservaDto) {
-    return this.reservaService.create(createReservaDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.reservaService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reservaService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReservaDto: UpdateReservaDto) {
-    return this.reservaService.update(+id, updateReservaDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reservaService.remove(+id);
+  async createReserva(
+    @Query('hospedeId')hospedeId:string,
+  ){
+    const reservaCriada = await this.reservaService.createReserva(
+      hospedeId
+    )
+    return reservaCriada;
   }
 }

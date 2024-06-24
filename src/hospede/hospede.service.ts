@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { CreateHospedeDto } from './dto/create-hospede.dto';
-import { UpdateHospedeDto } from './dto/update-hospede.dto';
+import { CreateHospedeDTO } from './dto/create-hospede.dto';
+import { UpdateHospedeDTO } from './dto/update-hospede.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { HospedeEntity } from './hospede.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class HospedeService {
-  create(createHospedeDto: CreateHospedeDto) {
-    return 'This action adds a new hospede';
-  }
+    constructor(
+        @InjectRepository(HospedeEntity)
+        private readonly hospedeRepository: Repository<HospedeEntity>
+    ) { }
 
-  findAll() {
-    return `This action returns all hospede`;
-  }
+    async createHospede(hospedeEntity: HospedeEntity) {
+        await this.hospedeRepository.save(hospedeEntity);
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} hospede`;
-  }
+    async readHospede() {
+        const hospedesSalvos = await this.hospedeRepository.find();
+        return hospedesSalvos;
+    }
 
-  update(id: number, updateHospedeDto: UpdateHospedeDto) {
-    return `This action updates a #${id} hospede`;
-  }
+    async updateHospede(id: string, hospedeEntity: UpdateHospedeDTO) {
+        await this.hospedeRepository.update(id, hospedeEntity);
 
-  remove(id: number) {
-    return `This action removes a #${id} hospede`;
-  }
+    }
+
+    async deleteHospede(id: string) {
+        await this.hospedeRepository.delete(id);
+
+    }
 }

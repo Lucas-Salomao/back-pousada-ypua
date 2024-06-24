@@ -1,4 +1,44 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateHospedeDto } from './create-hospede.dto';
+import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
 
-export class UpdateHospedeDto extends PartialType(CreateHospedeDto) {}
+export class UpdateHospedeDTO {
+
+    constructor(
+        readonly id: string,
+    ) { }
+
+    @IsString()
+    @IsOptional()
+    nome: string;
+
+    @IsEmail()
+    @IsOptional()
+    email: string;
+
+    @IsOptional()
+    rg: string;
+
+    @IsOptional()
+    cpf: string;
+
+    @IsOptional()
+    rua: string;
+
+    @IsOptional()
+    numero: number;
+
+    @IsOptional()
+    complemento: string;
+
+    @IsOptional()
+    bairro: string;
+
+    @IsOptional()
+    cidade: string;
+
+    @IsOptional()
+    estado: string;
+
+    @IsOptional()
+    pais: string;
+
+}

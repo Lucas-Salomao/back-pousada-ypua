@@ -3,7 +3,7 @@ import { HospedeService } from './hospede.service';
 import { UpdateHospedeDTO } from './dto/update-hospede.dto';
 import { CreateHospedeDTO } from './dto/create-hospede.dto';
 import { HospedeEntity } from './hospede.entity';
-import { v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 @Controller('/hospede')
 export class HospedeController {
@@ -13,19 +13,25 @@ export class HospedeController {
 
   @Post()
   async createHospede(@Body() dadosHospede: CreateHospedeDTO) {
-    const hospedeEntity=new HospedeEntity();
-    hospedeEntity.id=uuid();
-    hospedeEntity.nome=dadosHospede.nome;
-    hospedeEntity.email=dadosHospede.email;
-    hospedeEntity.cpf=dadosHospede.cpf;
-    hospedeEntity.rg=dadosHospede.rg;
-    hospedeEntity.rua=dadosHospede.rua;
-    hospedeEntity.numero=dadosHospede.numero;
-    hospedeEntity.complemento=dadosHospede.complemento;
-    hospedeEntity.bairro=dadosHospede.bairro;
-    hospedeEntity.cidade=dadosHospede.cidade;
-    hospedeEntity.estado=dadosHospede.estado;
-    hospedeEntity.pais=dadosHospede.pais;
+    const hospedeEntity = new HospedeEntity();
+    hospedeEntity.id = uuid();
+    hospedeEntity.nome = dadosHospede.nome;
+    hospedeEntity.email = dadosHospede.email;
+    hospedeEntity.cpf = dadosHospede.cpf;
+    hospedeEntity.rg = dadosHospede.rg;
+    hospedeEntity.rua = dadosHospede.rua;
+    hospedeEntity.numero = dadosHospede.numero;
+    hospedeEntity.complemento = dadosHospede.complemento;
+    hospedeEntity.bairro = dadosHospede.bairro;
+    hospedeEntity.cidade = dadosHospede.cidade;
+    hospedeEntity.estado = dadosHospede.estado;
+    hospedeEntity.pais = dadosHospede.pais;
+
+    this.hospedeService.createHospede(hospedeEntity);
+    return {
+      usuario: hospedeEntity,
+      message: 'hospede criado com sucesso!'
+    }
   }
 
   @Get()
@@ -40,7 +46,7 @@ export class HospedeController {
 
     return {
       usuario: hospedeAtualizado,
-      message: 'usuario atualizado com sucesso!'
+      message: 'hospede atualizado com sucesso!'
     }
   }
 
@@ -50,7 +56,7 @@ export class HospedeController {
 
     return {
       usuario: hospedeDeleted,
-      message: 'usuario removido com sucesso!'
+      message: 'hospede removido com sucesso!'
     }
   }
 }

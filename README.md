@@ -54,12 +54,65 @@ O sistema utiliza as seguintes entidades para representar os dados:
 
 **(As tabelas Hóspede, Acomodação e Reserva permanecem iguais ao exemplo anterior)**
 
+## Configuração do Banco de Dados
+
+Este projeto utiliza Docker Compose para configurar o banco de dados PostgreSQL e o PgAdmin4.
+
+1. **Crie um arquivo docker-compose.yml na raiz do projeto com o seguinte conteúdo:**
+
+```yaml
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ypua
+    networks:
+      - postgres-compose-network
+
+  db-admin:
+    image: dpage/pgadmin4
+    ports:
+      - 15432:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "root@root.com"
+      PGADMIN_DEFAULT_PASSWORD: "root"
+    depends_on:
+      - db
+    networks:
+      - postgres-compose-network
+
+networks:
+  postgres-compose-network:
+    driver: bridge
+
+```
+
+1. **Suba os serviços do Docker Compose:**
+
+```bash
+docker-compose up -d
+
+```
+
+1. **Acesse o PgAdmin4 em seu navegador:**
+
+```
+http://localhost:15432/
+
+```
+
+1. **Conecte-se ao banco de dados `ypua` utilizando as credenciais definidas no arquivo docker-compose.yml.**
+
 ## Como Executar o Projeto
 
 **Pré-requisitos:**
 
 - Node.js e npm (ou yarn) instalados.
-- PostgreSQL instalado e configurado.
 
 **Passos:**
 

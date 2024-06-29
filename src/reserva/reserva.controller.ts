@@ -42,4 +42,16 @@ export class ReservaController {
       message: 'reserva removida com sucesso!'
     }
   }
+
+  @Get('nome/:nome')
+  async findReservaByName(@Param('nome') nome: string): Promise<ReservaEntity[]> {
+    const reservas = await this.reservaService.findReservaByName(nome);
+    return reservas;
+  }
+
+  @Get('cpf/:cpf')
+  async findReservaByCpf(@Param('cpf') cpf: string): Promise<ReservaEntity[]> {
+    const reservas = await this.reservaService.findReservaByCpf(cpf);
+    return reservas;
+  }
 }

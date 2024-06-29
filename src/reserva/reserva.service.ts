@@ -2,11 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ReservaEntity } from './reserva.entity';
 import { Repository } from 'typeorm';
-import { HospedeEntity } from 'src/hospede/hospede.entity';
+import { HospedeEntity } from '../hospede/hospede.entity';
 import { HotelCodeGeneratorService } from './hotel-code-generator.service';
 import { UsuarioEntity } from '../usuario/usuario.entity';
 import { UpdateReservaDTO } from './dto/update-reserva.dto';
 import { CreateReservaDTO } from './dto/create-reserva.dto';
+import { ReservaRepository } from './reserva.repository';
 
 @Injectable()
 export class ReservaService {
@@ -14,6 +15,7 @@ export class ReservaService {
   constructor(
     @InjectRepository(ReservaEntity)
     private readonly reservaRepository: Repository<ReservaEntity>,
+    private readonly reservaRepositoryCustom: ReservaRepository,
     @InjectRepository(HospedeEntity)
     private readonly usuarioRepository: Repository<UsuarioEntity>,
     private readonly hotelCodeGeneratorService: HotelCodeGeneratorService,
@@ -78,5 +80,13 @@ export class ReservaService {
 
     // Exclua a reserva do banco de dados
     await this.reservaRepository.delete(reserva.id);
+  }
+
+  async findReservaByName(nome: string): Promise<ReservaEntity[]> {
+    return this.reservaRepositoryCustom.searchByName(nome); 
+  }
+
+  async findReservaByCpf(cpf: string): Promise<ReservaEntity[]> {
+    return this.reservaRepositoryCustom.searchByCpf(cpf); 
   }
 }

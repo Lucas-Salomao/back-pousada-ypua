@@ -18,4 +18,20 @@ export class ReservaRepository extends Repository<ReservaEntity> {
 
         return possivelReserva;
     }
+
+    async searchByName(nome: string): Promise<ReservaEntity[]> {
+        return this.createQueryBuilder('reserva')
+            .leftJoinAndSelect('reserva.hospedes', 'hospedes')
+            .where('hospedes.nome LIKE :nome', { nome: `%${nome}%` })
+            .getMany();
+    }
+
+    async searchByCpf(cpf: string): Promise<ReservaEntity[]> {
+        return this.createQueryBuilder('reserva')
+            .leftJoinAndSelect('reserva.hospedes', 'hospedes')
+            .where('hospedes.cpf = :cpf', { cpf })
+            .getMany();
+    }
+
+
 }

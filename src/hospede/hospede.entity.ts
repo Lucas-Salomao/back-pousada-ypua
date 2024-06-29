@@ -1,4 +1,5 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
+import { ReservaEntity } from '../reserva/reserva.entity';
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, OneToMany, ManyToOne} from 'typeorm';
 
 @Entity({name: 'hospedes'})
 export class HospedeEntity{
@@ -47,4 +48,7 @@ export class HospedeEntity{
 
     @DeleteDateColumn({name: 'deleted_at'})
     deletedAt:string;
+
+    @ManyToOne(() => ReservaEntity, reserva => reserva.hospedes)
+    reserva: ReservaEntity;
 }

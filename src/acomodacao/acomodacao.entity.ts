@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ReservaEntity } from "../reserva/reserva.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'acomodacoes' })
 export class AcomodacaoEntity {
@@ -90,5 +91,8 @@ export class AcomodacaoEntity {
 
     @DeleteDateColumn({name: 'deleted_at'})
     deletedAt:string;
+
+    @OneToMany(() => ReservaEntity, reserva => reserva.acomodacao)
+    reservas: ReservaEntity[];
 
 }

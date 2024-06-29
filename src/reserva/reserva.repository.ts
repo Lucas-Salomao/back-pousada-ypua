@@ -7,7 +7,7 @@ export class ReservaRepository extends Repository<ReservaEntity> {
 
     private reservas: ReservaEntity[] = [];
 
-    public searchByCode(codigo: string) {
+    async searchByCode(codigo: string) {
         const possivelReserva = this.reservas.find(
             reservaSalvo => reservaSalvo.codigo === codigo
         );

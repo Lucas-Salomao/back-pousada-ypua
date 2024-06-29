@@ -42,7 +42,7 @@ export class UsuarioRepository {
         return possivelUsuario !== undefined;
     }
 
-    public searchByID(id: string) {
+    async searchByID(id: string) {
         const possivelUsuario = this.usuarios.find(
             usuarioSalvo => usuarioSalvo.id === id
         );

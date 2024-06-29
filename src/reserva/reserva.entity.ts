@@ -1,7 +1,8 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, ManyToOne} from 'typeorm';
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, ManyToOne, OneToMany} from 'typeorm';
 import { StatusReserva } from './enum/StatusReserva.enum';
 import { HospedeEntity } from '../hospede/hospede.entity';
 import { UsuarioEntity } from '../usuario/usuario.entity';
+import { AcomodacaoEntity } from '../acomodacao/acomodacao.entity';
 
 @Entity({name: 'reservas'})
 export class ReservaEntity{
@@ -35,4 +36,10 @@ export class ReservaEntity{
 
     @ManyToOne(()=>UsuarioEntity, (usuario)=>usuario.reservas)
     usuario:UsuarioEntity
+
+    @ManyToOne(() => AcomodacaoEntity, acomodação => acomodação.reservas)
+    acomodacao: AcomodacaoEntity;
+
+    @OneToMany(() => HospedeEntity, hospedagem => hospedagem.reserva)
+    hospedes: HospedeEntity[];
 }

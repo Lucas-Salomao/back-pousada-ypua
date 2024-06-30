@@ -3,9 +3,16 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { useContainer } from 'class-validator';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    cors: {
+      origin: ['http://localhost:8080'], // Domínios permitidos
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Métodos HTTP permitidos
+      allowedHeaders: 'Content-Type, Accept', // Cabeçalhos permitidos
+    } as CorsOptions, // Adicione a tipagem para evitar erros
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

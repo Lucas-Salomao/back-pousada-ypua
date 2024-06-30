@@ -195,7 +195,7 @@ http://localhost:15432/
 
 O backend da aplicação pode ser facilmente dockerizado utilizando o seguinte `Dockerfile`:
 
-```
+```yaml
 # Base da imagem - Node.js
 FROM node:18-alpine
 

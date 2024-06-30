@@ -18,6 +18,10 @@ O projeto segue a arquitetura do NestJS, utilizando os seguintes módulos:
 - **Módulo de Acomodação:** Gerencia as informações sobre as acomodações.
 - **Módulo de Reserva:** Responsável pelo sistema de reservas.
 
+<p align="center">
+  <img src="./diagram/arquitetura-Arquitetura Final.drawio.png" alt="Diagrama de arquitetura da aplicação">
+</p>
+
 ## Tecnologias Utilizadas
 
 - **Node.js:** Ambiente de execução JavaScript.
@@ -25,6 +29,12 @@ O projeto segue a arquitetura do NestJS, utilizando os seguintes módulos:
 - **TypeORM:** ORM para mapeamento objeto-relacional, utilizado para interagir com o banco de dados.
 - **PostgreSQL:** Banco de dados relacional para armazenar os dados da aplicação.
 - **Class-validator:** Para validação de dados.
+
+## Arquitetura CI/CD
+
+<p align="center">
+  <img src="./diagram/arquitetura-CI_CD.drawio.png" alt="Diagrama de arquitetura da aplicação">
+</p>
 
 ## Modelagem de Dados
 
@@ -52,7 +62,80 @@ O sistema utiliza as seguintes entidades para representar os dados:
 | updatedAt | string | Data e hora da última atualização do registro |
 | deletedAt | string | Data e hora da exclusão lógica do registro (se aplicável) |
 
-**(As tabelas Hóspede, Acomodação e Reserva permanecem iguais ao exemplo anterior)**
+**Tabela Hóspede:**
+
+| Coluna | Tipo | Descrição |
+| --- | --- | --- |
+| id | uuid | Identificador único do hóspede (gerado automaticamente) |
+| nome | string | Nome completo do hóspede |
+| email | string | Endereço de e-mail do hóspede |
+| rg | string | Número do RG do hóspede |
+| cpf | string | Número do CPF do hóspede |
+| rua | string | Nome da rua do endereço do hóspede |
+| numero | int | Número da residência do hóspede |
+| complemento | string | Complemento do endereço do hóspede (opcional) |
+| bairro | string | Bairro do endereço do hóspede |
+| cidade | string | Cidade do endereço do hóspede |
+| estado | string | Estado do endereço do hóspede |
+| pais | string | País do endereço do hóspede |
+| createdAt | string | Data e hora de criação do registro |
+| updatedAt | string | Data e hora da última atualização do registro |
+| deletedAt | string | Data e hora da exclusão lógica do registro (se aplicável) |
+
+**Tabela Acomodação:**
+
+| Coluna | Tipo | Descrição |
+| --- | --- | --- |
+| id | uuid | Identificador único da acomodação (gerado automaticamente) |
+| nome | string | Nome da acomodação (ex: Quarto Duplo, Suíte) |
+| numero | int | Número da acomodação |
+| categoria | string | Categoria da acomodação (ex: Standard, Luxo) |
+| capacidade | int | Capacidade máxima de pessoas da acomodação |
+| quantidade_camas | int | Quantidade de camas na acomodação |
+| tipo_cama | string | Tipo de cama na acomodação (ex: Solteiro, Casal, King Size) |
+| tipo_banheiro | string | Tipo de banheiro (ex: Privativo, Compartilhado) |
+| com_chuveiro | boolean | Indica se a acomodação possui chuveiro |
+| com_banheira | boolean | Indica se a acomodação possui banheira |
+| com_bide | boolean | Indica se a acomodação possui bidê |
+| com_ar_condicionado | boolean | Indica se a acomodação possui ar condicionado |
+| com_aquecedor | boolean | Indica se a acomodação possui aquecedor |
+| com_tv | boolean | Indica se a acomodação possui TV |
+| tamanho_tv | int | Tamanho da TV em polegadas (se aplicável) |
+| canais_tv | string | Canais de TV disponíveis (opcional) |
+| com_wifi | boolean | Indica se a acomodação possui Wi-Fi |
+| velocidade_wifi | string | Velocidade do Wi-Fi (ex: 100mbps, 500mbps) |
+| wifi_pago | boolean | Indica se o Wi-Fi é pago |
+| com_mini_bar | boolean | Indica se a acomodação possui frigobar |
+| com_cofre | boolean | Indica se a acomodação possui cofre |
+| com_telefone | boolean | Indica se a acomodação possui telefone |
+| com_varanda | boolean | Indica se a acomodação possui varanda |
+| vista | string | Descrição da vista da acomodação (opcional) |
+| preco | float | Preço da diária da acomodação |
+| createdAt | string | Data e hora de criação do registro |
+| updatedAt | string | Data e hora da última atualização do registro |
+| deletedAt | string | Data e hora da exclusão lógica do registro (se aplicável) |
+
+**Tabela Reserva:**
+
+| Coluna | Tipo | Descrição |
+| --- | --- | --- |
+| id | uuid | Identificador único da reserva (gerado automaticamente) |
+| codigo | string | Código único da reserva (gerado automaticamente) |
+| usuarioId | uuid | ID do usuário que realizou a reserva |
+| acomodacaoId | uuid | ID da acomodação reservada |
+| dataEntrada | string | Data de entrada na acomodação |
+| dataSaida | string | Data de saída da acomodação |
+| status | enum | Status da reserva (ex: EM_PROCESSAMENTO, RESERVADO, CANCELADO, CONCLUIDO) |
+| valorTotal | float | Valor total da reserva |
+| createdAt | string | Data e hora de criação da reserva |
+| updatedAt | string | Data e hora da última atualização da reserva |
+| deletedAt | string | Data e hora da exclusão lógica da reserva (se aplicável) |
+
+## Diagrama DER
+
+<p align="center">
+  <img src="./diagram/arquitetura-DER.drawio.png" alt="Diagrama DER">
+</p>
 
 ## Configuração do Banco de Dados
 
@@ -92,21 +175,62 @@ networks:
 
 ```
 
-1. **Suba os serviços do Docker Compose:**
+2. **Suba os serviços do Docker Compose:**
 
 ```bash
 docker-compose up -d
 
 ```
 
-1. **Acesse o PgAdmin4 em seu navegador:**
+3. **Acesse o PgAdmin4 em seu navegador:**
 
 ```
 http://localhost:15432/
 
 ```
 
-1. **Conecte-se ao banco de dados `ypua` utilizando as credenciais definidas no arquivo docker-compose.yml.**
+4. **Conecte-se ao banco de dados `ypua` utilizando as credenciais definidas no arquivo docker-compose.yml.**
+
+## Dockerização do Backend
+
+O backend da aplicação pode ser facilmente dockerizado utilizando o seguinte `Dockerfile`:
+
+```
+# Base da imagem - Node.js
+FROM node:18-alpine
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copia o package.json e package-lock.json para o container
+COPY package*.json ./
+
+# Instala as dependências
+RUN npm install
+
+# Copia o código da aplicação para o container
+COPY . .
+
+# Define a porta de exposição (opcional)
+EXPOSE ${PORT}
+
+# Comando para executar a aplicação
+CMD ["npm", "run", "start:dev"]
+
+```
+
+**Para construir a imagem Docker:**
+
+```bash
+docker build -t pousada-backend .
+
+```
+
+**Para executar o container Docker:**
+
+```bash
+docker run -p 3000:3000 -e PORT=3000 pousada-backend
+```
 
 ## Como Executar o Projeto
 

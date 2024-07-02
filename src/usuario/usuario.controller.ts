@@ -7,7 +7,7 @@ import { ShowUsuarioDTO } from "./dto/showUsuario.dto";
 import { UpdateUsuarioDTO } from "./dto/updateUsuario.dto";
 import { UsuarioService } from "./usuario.service";
 
-@Controller('/usuarios')
+@Controller('/usuario')
 export class UsuarioController{
 
     constructor(

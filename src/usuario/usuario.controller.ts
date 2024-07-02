@@ -37,7 +37,7 @@ export class UsuarioController{
 
         this.usuarioService.createUsuario(usuarioEntity);
         return {
-            usuario: new ShowUsuarioDTO(usuarioEntity.id, usuarioEntity.nome),
+            usuario: new ShowUsuarioDTO(usuarioEntity.id, usuarioEntity.nome,usuarioEntity.email,usuarioEntity.rg,usuarioEntity.cpf,usuarioEntity.role),
             message:'usuario criado com sucesso!'
         }
     }

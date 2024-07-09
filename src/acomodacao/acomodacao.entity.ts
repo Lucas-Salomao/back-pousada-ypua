@@ -1,5 +1,6 @@
 import { ReservaEntity } from "../reserva/reserva.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { FotosAcomodacaoEntity } from "./fotos.acomodacao.entity";
 
 @Entity({ name: 'acomodacoes' })
 export class AcomodacaoEntity {
@@ -14,8 +15,8 @@ export class AcomodacaoEntity {
     @Column({ name: 'numero', nullable: false, type: 'int' })
     numero: number;
 
-    @Column({ name: 'categoria', length: 20, nullable: false })
-    categoria: string;
+    // @Column({ name: 'categoria', length: 20, nullable: false })
+    // categoria: string;
 
     @Column({ name: 'capacidade', nullable: false, type: 'int' })
     capacidade: number;
@@ -37,8 +38,23 @@ export class AcomodacaoEntity {
     @Column({ name: "com_banheira", nullable: false })
     comBanheira: boolean;
 
-    @Column({ name: "com_bide", nullable: false })
-    comBide: boolean;
+    // @Column({ name: "com_bide", nullable: false })
+    // comBide: boolean;
+
+    @Column({ name: "com_toalhas", nullable: false })
+    comToalhas: boolean;
+
+    @Column({ name: "com_secador", nullable: false })
+    comSecador: boolean;
+
+    @Column({ name: "com_acessibilidade", nullable: false })
+    comAcessibilidade: boolean;
+
+    @Column({ name: "com_cozinha", nullable: false })
+    comCozinha: boolean;
+
+    @Column({ name: "com_restaurante", nullable: false })
+    comRestaurante: boolean;
 
     // Comodidades Adicionais
     @Column({ name: "com_ar_condicionado", nullable: false })
@@ -53,32 +69,32 @@ export class AcomodacaoEntity {
     @Column({ name: "tamanho_tv", nullable: false, type: 'int'})
     tamanhoTV: number; // Em polegadas
 
-    @Column({ name: "canais_tv", length: 20, nullable: true })
-    canaisTV: string; // Canais disponíveis (opcional)
+    // @Column({ name: "canais_tv", length: 20, nullable: true })
+    // canaisTV: string; // Canais disponíveis (opcional)
 
     @Column({ name: "com_wifi", nullable: false })
     comWifi: boolean;
 
-    @Column({ name: "velocidade_wifi", nullable: false })
-    velocidadeWifi: string; // Ex: "100mbps", "500mbps"
+    // @Column({ name: "velocidade_wifi", nullable: false })
+    // velocidadeWifi: string; // Ex: "100mbps", "500mbps"
 
-    @Column({ name: "wifi_pago", nullable: false })
-    wifiPago: boolean;
+    // @Column({ name: "wifi_pago", nullable: false })
+    // wifiPago: boolean;
 
-    @Column({ name: "com_mini_bar", nullable: false })
-    comMiniBar: boolean;
+    @Column({ name: "com_frigobar", nullable: false })
+    comFrigobar: boolean;
 
     @Column({ name: "com_cofre", nullable: false })
     comCofre: boolean;
 
-    @Column({ name: "com_telefone", nullable: false })
-    comTelefone: boolean;
+    // @Column({ name: "com_telefone", nullable: false })
+    // comTelefone: boolean;
 
     @Column({ name: "com_varanda", nullable: false })
     comVaranda: boolean;
 
-    @Column({ name: "vista", length: 50, nullable: false })
-    vista: string; // Descrição da vista
+    @Column({ name: "descricao", length: 500, nullable: false })
+    descricao: string; // Descrição da vista
 
     @Column({ name: "preco", nullable: false, type: 'float'})
     preco: number;
@@ -94,5 +110,8 @@ export class AcomodacaoEntity {
 
     @OneToMany(() => ReservaEntity, reserva => reserva.acomodacao)
     reservas: ReservaEntity[];
+
+    @OneToMany(() => FotosAcomodacaoEntity, (foto) => foto.acomodacao, { cascade: true })
+    fotos: FotosAcomodacaoEntity[];
 
 }

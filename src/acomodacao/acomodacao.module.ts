@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AcomodacaoController } from './acomodacao.controller';
 import { NumberIsUniqueValidator } from './validator/numero-is-unique.validator';
 import { AcomodacaoRepository } from './acomodacao.repository';
+import { FotosAcomodacaoEntity } from './fotos.acomodacao.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AcomodacaoEntity])],
+  imports: [TypeOrmModule.forFeature([AcomodacaoEntity, FotosAcomodacaoEntity])],
   controllers:[AcomodacaoController],
   providers: [AcomodacaoService, AcomodacaoEntity,NumberIsUniqueValidator,AcomodacaoRepository]
 })

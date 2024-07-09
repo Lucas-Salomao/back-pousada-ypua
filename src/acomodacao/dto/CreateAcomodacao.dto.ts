@@ -1,4 +1,4 @@
-import { IsInt, IsString, IsNotEmpty, IsBoolean, IsOptional } from "class-validator";
+import { IsInt, IsString, IsNotEmpty, IsBoolean, IsOptional, IsArray, IsCurrency } from "class-validator";
 import { NumberIsUnique } from "../validator/numero-is-unique.validator";
 
 export class CreateAcomodacaoDTO {
@@ -11,9 +11,9 @@ export class CreateAcomodacaoDTO {
   @NumberIsUnique({message:'Ja existe uma acomodação com este numero'})
   numero: number;
 
-  @IsString()
-  @IsNotEmpty()
-  categoria: string;
+  // @IsString()
+  // @IsNotEmpty()
+  // categoria: string;
 
   @IsInt()
   @IsNotEmpty()
@@ -41,9 +41,29 @@ export class CreateAcomodacaoDTO {
   @IsNotEmpty()
   comBanheira: boolean;
 
+  // @IsBoolean()
+  // @IsNotEmpty()
+  // comBide: boolean;
+
   @IsBoolean()
   @IsNotEmpty()
-  comBide: boolean;
+  comToalhas: boolean;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  comSecador: boolean;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  comAcessibilidade: boolean;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  comCozinha: boolean;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  comRestaurante: boolean;
 
   // Comodidades Adicionais
   @IsBoolean()
@@ -62,33 +82,33 @@ export class CreateAcomodacaoDTO {
   @IsNotEmpty()
   tamanhoTV: number;
 
-  @IsOptional()
-  @IsString()
-  canaisTV: string;
+  // @IsOptional()
+  // @IsString()
+  // canaisTV: string;
 
   @IsBoolean()
   @IsNotEmpty()
   comWifi: boolean;
 
-  @IsString()
-  @IsNotEmpty()
-  velocidadeWifi: string;
+  // @IsString()
+  // @IsNotEmpty()
+  // velocidadeWifi: string;
+
+  // @IsBoolean()
+  // @IsNotEmpty()
+  // wifiPago: boolean;
 
   @IsBoolean()
   @IsNotEmpty()
-  wifiPago: boolean;
-
-  @IsBoolean()
-  @IsNotEmpty()
-  comMiniBar: boolean;
+  comFrigobar: boolean;
 
   @IsBoolean()
   @IsNotEmpty()
   comCofre: boolean;
 
-  @IsBoolean()
-  @IsNotEmpty()
-  comTelefone: boolean;
+  // @IsBoolean()
+  // @IsNotEmpty()
+  // comTelefone: boolean;
 
   @IsBoolean()
   @IsNotEmpty()
@@ -96,9 +116,13 @@ export class CreateAcomodacaoDTO {
 
   @IsString()
   @IsNotEmpty()
-  vista: string;
+  descriacao: string;
 
-  @IsInt()
+  @IsCurrency()
   @IsNotEmpty()
   preco: number;
+
+  @IsArray()
+  fotos: { nome: string; tipo: string; imagem: Buffer }[]; // Ajuste o tipo de acordo com seus dados
+  
 }

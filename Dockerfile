@@ -1,6 +1,8 @@
 # Base da imagem - Node.js
 FROM node:18-alpine
 
+ENV HOST 0.0.0.0
+
 # Define o diretório de trabalho dentro do container
 WORKDIR /app
 

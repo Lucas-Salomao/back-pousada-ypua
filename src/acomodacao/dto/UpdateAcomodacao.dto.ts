@@ -1,7 +1,12 @@
 import { IsInt, IsString, IsOptional, IsBoolean } from "class-validator";
 import { NumberIsUnique } from "../validator/numero-is-unique.validator";
+import { Exclude } from "class-transformer";
 
 export class UpdateAcomodacaoDTO {
+  @IsOptional()
+  @Exclude()
+  id?: string;
+  
   @IsOptional()
   @IsString()
   nome: string;

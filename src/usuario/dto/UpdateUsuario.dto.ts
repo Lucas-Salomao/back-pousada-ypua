@@ -1,12 +1,13 @@
 import { IsString, IsEmail, MinLength, IsNotEmpty, IsOptional} from "class-validator";
 import { EmailIsUnique } from "../validator/email-is-unique.validator";
 import { RGIsUnique } from "../validator/rg-is-unique.validator";
+import { Exclude } from "class-transformer";
 
 export class UpdateUsuarioDTO{
     
-    constructor(
-        readonly id:string,
-    ){}
+    @IsOptional()
+    @Exclude()
+    id?: string;
     
     @IsString()
     @IsOptional()

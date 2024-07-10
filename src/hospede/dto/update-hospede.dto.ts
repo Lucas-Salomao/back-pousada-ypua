@@ -1,10 +1,11 @@
+import { Exclude } from 'class-transformer';
 import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
 
 export class UpdateHospedeDTO {
 
-    constructor(
-        readonly id: string,
-    ) { }
+    @IsOptional()
+    @Exclude()
+    id?: string;
 
     @IsString()
     @IsOptional()

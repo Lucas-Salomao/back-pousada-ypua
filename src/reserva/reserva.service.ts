@@ -8,6 +8,8 @@ import { UsuarioEntity } from '../usuario/usuario.entity';
 import { UpdateReservaDTO } from './dto/update-reserva.dto';
 import { CreateReservaDTO } from './dto/create-reserva.dto';
 import { ReservaRepository } from './reserva.repository';
+import { CreateReservaFormDataDTO } from './dto/create-reserva-formdata.dto';
+import { AcomodacaoEntity } from '../acomodacao/acomodacao.entity';
 
 @Injectable()
 export class ReservaService {
@@ -16,13 +18,24 @@ export class ReservaService {
     @InjectRepository(ReservaEntity)
     private readonly reservaRepository: Repository<ReservaEntity>,
     private readonly reservaRepositoryCustom: ReservaRepository,
-    @InjectRepository(HospedeEntity)
+    @InjectRepository(AcomodacaoEntity)
+    private readonly acomodacaoRepository: Repository<AcomodacaoEntity>,
+    @InjectRepository(UsuarioEntity)
     private readonly usuarioRepository: Repository<UsuarioEntity>,
     private readonly hotelCodeGeneratorService: HotelCodeGeneratorService,
+    @InjectRepository(HospedeEntity)
+    private readonly hospedeRepository: Repository<HospedeEntity>,
   ) { }
 
-  async createReserva(usuarioId: string, dadosReserva: CreateReservaDTO) {
-    const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId })
+  async createReserva(dadosReserva: CreateReservaFormDataDTO) {
+    const usuario = await this.usuarioRepository.findOneBy({ id: dadosReserva.usuarioId })
+    const acomodacao = await this.acomodacaoRepository.findOneBy({ id: dadosReserva.acomodacaoId })
+    const hospedes = await Promise.all(
+      dadosReserva.hospedeIds.map(
+        async (hospedeId) =>
+          await this.hospedeRepository.findOneBy({ id: hospedeId })
+      )
+    );
     const reservaEntity = new ReservaEntity();
 
     reservaEntity.codigo = this.hotelCodeGeneratorService.generateCode();
@@ -30,7 +43,9 @@ export class ReservaService {
     reservaEntity.dataSaida = dadosReserva.dataSaida;
     reservaEntity.status = dadosReserva.status;
     reservaEntity.usuario = usuario;
-    reservaEntity.valorTotal = dadosReserva.valorTotal;
+    reservaEntity.valorTotal = Number(dadosReserva.valorTotal);
+    reservaEntity.acomodacao=acomodacao;
+    reservaEntity.hospedes=hospedes;
 
     console.log(reservaEntity);
 

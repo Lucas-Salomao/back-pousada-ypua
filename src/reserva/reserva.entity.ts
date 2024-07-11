@@ -37,7 +37,7 @@ export class ReservaEntity{
     @ManyToOne(()=>UsuarioEntity, (usuario)=>usuario.reservas)
     usuario:UsuarioEntity
 
-    @ManyToOne(() => AcomodacaoEntity, acomodação => acomodação.reservas)
+    @ManyToOne(() => AcomodacaoEntity, acomodacao => acomodacao.reservas)
     acomodacao: AcomodacaoEntity;
 
     @OneToMany(() => HospedeEntity, hospedagem => hospedagem.reserva)

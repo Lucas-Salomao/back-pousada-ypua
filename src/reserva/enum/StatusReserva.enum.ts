@@ -1,6 +1,6 @@
 export enum StatusReserva{
-    EM_PROCESSAMENTO='em_processamento',
-    RESERVADO='reservado',
-    CANCELADO='cancelado',
-    CONCLUIDO='concluido',
+    EM_PROCESSAMENTO='EM PROCESSAMENTO',
+    RESERVADO='RESERVADO',
+    CANCELADO='CANCELADO',
+    CONCLUIDO='CONCLUÍDO',
 }

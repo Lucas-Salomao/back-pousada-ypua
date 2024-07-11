@@ -3,16 +3,16 @@ import { ReservaService } from './reserva.service';
 import { CreateReservaDTO } from './dto/create-reserva.dto';
 import { UpdateReservaDTO } from './dto/update-reserva.dto';
 import { ReservaEntity } from './reserva.entity';
+import { CreateReservaFormDataDTO } from './dto/create-reserva-formdata.dto';
 
 @Controller('/reserva')
 export class ReservaController {
   constructor(private readonly reservaService: ReservaService) { }
 
   @Post()
-  async createReserva(@Body() createReservaDTO: CreateReservaDTO) {
+  async createReserva(@Body() createReservaFormDataDTO: CreateReservaFormDataDTO) {
     const reservaCriada = await this.reservaService.createReserva(
-      createReservaDTO.usuarioId, // Extraia o usuarioId do corpo da requisição
-      createReservaDTO, // Passe o CreateReservaDTO inteiro para o service
+      createReservaFormDataDTO, // Passe o CreateReservaDTO inteiro para o service
     );
     return reservaCriada;
   }

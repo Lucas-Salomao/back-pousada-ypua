@@ -6,9 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HotelCodeGeneratorService } from './hotel-code-generator.service';
 import { HospedeEntity } from '../hospede/hospede.entity';
 import { ReservaRepository } from './reserva.repository';
+import { AcomodacaoEntity } from '../acomodacao/acomodacao.entity';
+import { UsuarioEntity } from '../usuario/usuario.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ReservaEntity,HospedeEntity])],
+  imports: [TypeOrmModule.forFeature([ReservaEntity,HospedeEntity,AcomodacaoEntity,UsuarioEntity])],
   controllers: [ReservaController],
   providers: [ReservaService,HotelCodeGeneratorService,ReservaRepository],
 })

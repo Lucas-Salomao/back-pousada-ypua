@@ -52,7 +52,9 @@ export class ReservaService {
   }
 
   async readReserva() {
-    const reservasSalvos = await this.reservaRepository.find();
+    const reservasSalvos = await this.reservaRepository.find({
+      relations: ['usuario', 'acomodacao', 'hospedes'], // Inclui as relações na busca
+    });
     return reservasSalvos;
   }
 

@@ -47,8 +47,6 @@ export class ReservaService {
     reservaEntity.acomodacao=acomodacao;
     reservaEntity.hospedes=hospedes;
 
-    console.log(reservaEntity);
-
     const reservaCriado = await this.reservaRepository.save(reservaEntity);
     return reservaCriado;
   }

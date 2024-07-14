@@ -9,19 +9,19 @@ export class CreateUsuarioDTO{
     nome:string;
     
     @IsEmail()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'E-mail deve ser preenchido'})
     @EmailIsUnique({message:'Ja existe um usuario com este e-mail'})
     email:string;
 
     @MinLength(8, {message:'A senha deve conter 8 caracteres'})
-    @IsNotEmpty()
+    @IsNotEmpty({message:'A senha deve ser preenchida'})
     senha:string;
     
-    @IsNotEmpty()
+    @IsNotEmpty({message:'RG deve ser preenchido'})
     @RGIsUnique({message:'Ja existe um usuario com este RG'})
     rg:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message:'CPF deve ser preenchido'})
     @CPFIsUnique({message:'Ja existe um usuario com este CPF'})
     cpf:string;
 

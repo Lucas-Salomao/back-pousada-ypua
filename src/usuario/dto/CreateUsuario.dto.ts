@@ -1,10 +1,11 @@
 import { IsString, IsEmail, MinLength, IsNotEmpty, IsOptional} from "class-validator";
 import { EmailIsUnique } from "../validator/email-is-unique.validator";
 import { RGIsUnique } from "../validator/rg-is-unique.validator";
+import { CPFIsUnique } from "../validator/cpf-is-unique.validator";
 
 export class CreateUsuarioDTO{
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Nome deve ser preenchido'})
     nome:string;
     
     @IsEmail()
@@ -21,30 +22,30 @@ export class CreateUsuarioDTO{
     rg:string;
 
     @IsNotEmpty()
-    @RGIsUnique({message:'Ja existe um usuario com este CPF'})
+    @CPFIsUnique({message:'Ja existe um usuario com este CPF'})
     cpf:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Endereço deve ser preenchido'})
     rua:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Número deve ser preenchido'})
     numero:number;
 
     @IsOptional()
     complemento:string;
     
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Bairro deve ser preenchido'})
     bairro:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Cidade deve ser preenchido'})
     cidade:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Estado deve ser preenchido'})
     estado:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message:'País deve ser preenchido'})
     pais:string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Função deve ser preenchido'})
     role:string;
 }

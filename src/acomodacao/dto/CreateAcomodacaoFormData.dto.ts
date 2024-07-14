@@ -2,11 +2,11 @@ import { IsInt, IsString, IsNotEmpty, IsBoolean, IsOptional, IsArray } from "cla
 
 export class CreateAcomodacaoFormDataDTO {
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Nome deve ser preenchido'})
     nome: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Número deve ser preenchido'})
     numero: string;
 
     //   @IsString()
@@ -14,21 +14,21 @@ export class CreateAcomodacaoFormDataDTO {
     //   categoria: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Capacidade deve ser preenchido'})
     capacidade: string;
 
     // Características das Camas
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Quantidade deve ser preenchido'})
     quantidadeCamas: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Tipo de cama deve ser preenchido'})
     tipoCama: string;
 
     // Características do Banheiro
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Tipo de banheiro deve ser preenchido'})
     tipoBanheiro: string;
 
     @IsString()
@@ -77,7 +77,7 @@ export class CreateAcomodacaoFormDataDTO {
     comTV: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Tamnho da TV deve ser preenchido'})
     tamanhoTV: string;
 
     // @IsOptional()
@@ -113,10 +113,10 @@ export class CreateAcomodacaoFormDataDTO {
     comVaranda: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Descrição deve ser preenchido'})
     descricao: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Preço deve ser preenchido'})
     preco: string;
 }

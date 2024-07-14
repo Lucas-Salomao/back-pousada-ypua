@@ -9,25 +9,25 @@ export class CreateReservaFormDataDTO {
     usuarioId: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Data de entrada deve ser preenchida'})
     dataEntrada: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Data de saída deve ser preenchida'})
     dataSaida: string;
 
     @IsEnum(StatusReserva)
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Status da reserva deve ser preenchido'})
     status: StatusReserva;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Valor Total deve ser preenchido'})
     valorTotal: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsNotEmpty({message:'Acomodação deve ser escolhida'})
     acomodacaoId: string;
 
-    @IsOptional()
+    @IsOptional({message:'Hóspedes deve ser preenchido'})
     hospedeIds: string[];
 }

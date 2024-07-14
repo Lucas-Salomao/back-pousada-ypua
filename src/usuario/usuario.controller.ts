@@ -3,8 +3,8 @@ import { UsuarioRepository } from "./usuario.repository"
 import { CreateUsuarioDTO } from "./dto/CreateUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
 import { v4 as uuid} from 'uuid'
-import { ShowUsuarioDTO } from "./dto/showUsuario.dto";
-import { UpdateUsuarioDTO } from "./dto/updateUsuario.dto";
+import { ShowUsuarioDTO } from "./dto/ShowUsuario.dto";
+import { UpdateUsuarioDTO } from "./dto/UpdateUsuario.dto";
 import { UsuarioService } from "./usuario.service";
 
 @Controller('/usuario')

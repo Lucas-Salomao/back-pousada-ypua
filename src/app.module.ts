@@ -5,12 +5,10 @@ import { AppController } from './app.controller';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {PostgresConfigService} from './config/postgres.config.service';
 import {ConfigModule} from '@nestjs/config';
-import { HospedeController } from './hospede/hospede.controller';
-import { ReservaController } from './reserva/reserva.controller';
 import { ReservaModule } from './reserva/reserva.module';
 import { HospedeModule } from './hospede/hospede.module';
 import { AcomodacaoModule } from './acomodacao/acomodacao.module';
-import { AcomodacaoController } from './acomodacao/acomodacao.controller';
+import { MapsModule } from './maps/maps.module';
 
 
 @Module({
@@ -27,6 +25,7 @@ import { AcomodacaoController } from './acomodacao/acomodacao.controller';
     HospedeModule,
     AcomodacaoModule,
     UsuarioModule,
+    MapsModule
   ],
   controllers: [AppController],
   providers: [AppService],

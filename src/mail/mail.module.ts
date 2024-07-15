@@ -12,8 +12,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
         port: 587, // porta
         auth: {
           //dados do usuário e senha
-          user: "postmaster@sandbox024d2b9e3e974f87b2926f6bacfe5efd.mailgun.org",
-          pass: "4ce90178f8c6355e736f8127a4a25a74-91fbbdba-a05a5da1",
+          user: process.env.MAIL_USER,
+          pass: process.env.MAIL_PASSWORD,
         },
         ignoreTLS: true,
       },

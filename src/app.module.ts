@@ -9,6 +9,7 @@ import { ReservaModule } from './reserva/reserva.module';
 import { HospedeModule } from './hospede/hospede.module';
 import { AcomodacaoModule } from './acomodacao/acomodacao.module';
 import { MapsModule } from './maps/maps.module';
+import { MailModule } from './mail/mail.module';
 
 
 @Module({
@@ -25,7 +26,8 @@ import { MapsModule } from './maps/maps.module';
     HospedeModule,
     AcomodacaoModule,
     UsuarioModule,
-    MapsModule
+    MapsModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

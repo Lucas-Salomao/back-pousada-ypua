@@ -23,9 +23,8 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Pousada Ypuã')
-    .setDescription('Pousada Ypuã API description')
+    .setDescription('Pousada Ypuã API')
     .setVersion('1.0')
-    .addTag('ypua')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

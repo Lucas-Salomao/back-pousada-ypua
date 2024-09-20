@@ -6,7 +6,9 @@ import { v4 as uuid} from 'uuid'
 import { ShowUsuarioDTO } from "./dto/ShowUsuario.dto";
 import { UpdateUsuarioDTO } from "./dto/UpdateUsuario.dto";
 import { UsuarioService } from "./usuario.service";
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
 
+@ApiTags('usuario')
 @Controller('/usuario')
 export class UsuarioController{
 
@@ -16,8 +18,11 @@ export class UsuarioController{
 
     ) {}
 
+    @ApiOperation({summary:'Cria um novo usuario'})
+    @ApiCreatedResponse({description:'Retorna o usuario criado', type: ShowUsuarioDTO})
+    @ApiUnprocessableEntityResponse({description:'Erro de validação'})
     @Post()
-    async createUsuario(@Body() dadosUsuario:CreateUsuarioDTO)
+    async createUsuario(@Body() dadosUsuario: CreateUsuarioDTO)
     {
         const usuarioEntity = new UsuarioEntity();
         usuarioEntity.id=uuid();
@@ -42,12 +47,14 @@ export class UsuarioController{
         }
     }
 
+    @ApiOperation({summary:'Lista todos os usuarios'})
     @Get()
     async readUsuario(){
         const usuariosSalvos=await this.usuarioService.readUsuario();        
         return usuariosSalvos;
     }
 
+    @ApiOperation({summary:'Atualiza um usuario'})
     @Put('/:id')
     async updateUsuario(@Param('id') id:string, @Body() dadosUsuario:UpdateUsuarioDTO)
     {
@@ -59,6 +66,7 @@ export class UsuarioController{
         }
     }
 
+    @ApiOperation({summary:'Deleta um usuario'})
     @Delete('/:id')
     async deleteUsuario(@Param('id') id: string)
     {

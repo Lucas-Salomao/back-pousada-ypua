@@ -42,8 +42,8 @@ export class UpdateReservaDTO {
 
     @ApiProperty({
         type: Number,
-        description: 'Quantidade de diárias',
-        example: 4,
+        description: 'Status da reserva',
+        example: 'RESERVADO',
         required: false,
     })
     @IsOptional()

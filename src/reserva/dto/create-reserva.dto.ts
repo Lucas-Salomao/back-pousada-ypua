@@ -45,8 +45,8 @@ export class CreateReservaDTO {
 
     @ApiProperty({
         type: Number,
-        description: 'Quantidade de diárias',
-        example: 4,
+        description: 'Status da reserva',
+        example: 'RESERVADO',
         required: true,
     })
     @IsEnum(StatusReserva)

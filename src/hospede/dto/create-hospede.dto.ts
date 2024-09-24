@@ -18,8 +18,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'Email do hospede',
+        example: 'email@email.com',
         required: true,
     })
     @IsEmail()
@@ -29,8 +29,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'RG do hospede',
+        example: '12345678',
         required: true,
     })
     @IsNotEmpty()
@@ -39,8 +39,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'CPF do hospede',
+        example: '12345678901',
         required: true,
     })
     @IsNotEmpty()
@@ -49,8 +49,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'Rua do endereço',
+        example: 'Rua das Flores',
         required: true,
     })
     @IsNotEmpty({message:'Endereço deve ser preenchido'})
@@ -58,8 +58,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'Número da residência',
+        example: '999',
         required: true,
     })
     @IsNotEmpty({message:'Número deve ser preenchido'})
@@ -67,8 +67,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'Complemento do endereço',
+        example: 'Casa 1',
         required: false,
     })
     @IsOptional()
@@ -76,8 +76,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'Bairro do endereço',
+        example: 'Centro',
         required: true,
     })
     @IsNotEmpty({message:'Bairro deve ser preenchido'})
@@ -85,8 +85,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'Cidade do hospede',
+        example: 'São Paulo',
         required: true,
     })
     @IsNotEmpty({message:'Cidade deve ser preenchido'})
@@ -94,8 +94,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'Estado do hospede',
+        example: 'SP',
         required: true,
     })
     @IsNotEmpty({message:'Estado deve ser preenchido'})
@@ -103,8 +103,8 @@ export class CreateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hospede',
-        example: '999999999',
+        description: 'País do hospede',
+        example: 'Brasil',
         required: true,
     })
     @IsNotEmpty({message:'País deve ser preenchido'})

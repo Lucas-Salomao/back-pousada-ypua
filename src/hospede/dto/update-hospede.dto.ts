@@ -26,8 +26,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'Email do hóspede',
+        example: 'email@email.com',
         required: false,
     })
     @IsEmail()
@@ -36,8 +36,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'RG do hóspede',
+        example: '12345678',
         required: false,
     })
     @IsOptional()
@@ -45,8 +45,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'CPF do hóspede',
+        example: '12345678901',
         required: false,
     })
     @IsOptional()
@@ -54,8 +54,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'Rua do endereço',
+        example: 'Rua das Flores',
         required: false,
     })
     @IsOptional()
@@ -63,8 +63,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'Número da residência',
+        example: '999',
         required: false,
     })
     @IsOptional()
@@ -72,8 +72,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'COmplemento do endereço',
+        example: 'Casa',
         required: false,
     })
     @IsOptional()
@@ -81,8 +81,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'Bairro do endereço',
+        example: 'Centro',
         required: false,
     })
     @IsOptional()
@@ -90,8 +90,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'Cidade do hóspede',
+        example: 'São Paulo',
         required: false,
     })
     @IsOptional()
@@ -99,8 +99,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'Estado do hóspede',
+        example: 'SP',
         required: false,
     })
     @IsOptional()
@@ -108,8 +108,8 @@ export class UpdateHospedeDTO {
 
     @ApiProperty({
         type: String,
-        description: 'Telefone do hóspede',
-        example: '999999999',
+        description: 'País do hóspede',
+        example: 'Brasil',
         required: false,
     })
     @IsOptional()

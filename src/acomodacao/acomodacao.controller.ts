@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors, Req, HttpException, HttpStatus, NotFoundException, UploadedFiles, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors, Req, HttpException, HttpStatus, NotFoundException, UploadedFiles } from '@nestjs/common';
 import { AcomodacaoRepository } from './acomodacao.repository';
 import { AcomodacaoService } from './acomodacao.service';
 import { UpdateAcomodacaoDTO } from './dto/UpdateAcomodacao.dto';
@@ -9,9 +9,9 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { FotosAcomodacaoEntity } from './fotos.acomodacao.entity';
 import { CreateAcomodacaoFormDataDTO } from './dto/CreateAcomodacaoFormData.dto';
 import { Request } from 'express';
-import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@UseGuards(AutenticacaoGuard)
+@ApiTags('acomodacao')
 @Controller('/acomodacao')
 export class AcomodacaoController {
 
@@ -59,6 +59,7 @@ export class AcomodacaoController {
     //     }
     // }
 
+    @ApiOperation({ summary: 'Cria uma nova acomodação' })
     @Post()
     @UseInterceptors(FilesInterceptor('fotos')) // Permita múltiplos arquivos no campo 'fotos'
     //async createAcomodacao(@Req() dadosAcomodacao: any, @UploadedFiles() fotos: Array<Express.Multer.File>): Promise<any> {
@@ -107,12 +108,14 @@ export class AcomodacaoController {
         };
     }
 
+    @ApiOperation({ summary: 'Lista todas as acomodações' })
     @Get()
     async readAcomodacao() {
         const acomodacoesSalvos = await this.acomodacaoService.readAcomodacao();
         return acomodacoesSalvos;
     }
 
+    @ApiOperation({ summary: 'Busca uma acomodação pelo id' })
     @Put('/:id')
     async updateAcomodacao(@Param('id') id: string, @Body() dadosAcomodacao: UpdateAcomodacaoDTO) {
         const acomodacaoAtualizado = await this.acomodacaoService.updateAcomodacao(id, dadosAcomodacao);
@@ -123,6 +126,7 @@ export class AcomodacaoController {
         }
     }
 
+    @ApiOperation({ summary: 'Deleta uma acomodação' })
     @Delete('/:id')
     async deleteAcomodacao(@Param('id') id: string) {
         const acomodacaoDeleted = await this.acomodacaoService.deleteAcomodacao(id);

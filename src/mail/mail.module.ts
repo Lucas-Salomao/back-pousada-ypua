@@ -2,15 +2,14 @@ import { Module } from '@nestjs/common';
 import { MailController } from './mail.controller';
 import { MailService } from './mail.service';
 import { MailerModule } from '@nestjs-modules/mailer';
-import 'dotenv/config';
 
 @Module({
   imports: [
     MailerModule.forRoot({
       transport: {
-        host: process.env.MAIL_HOST, //host smtp
+        host: 'smtp.mailgun.org', //host smtp
         secure: false, //regras de segurança do serviço smtp
-        port: parseInt(process.env.SMTP_PORT), // porta
+        port: 587, // porta
         auth: {
           //dados do usuário e senha
           user: process.env.MAIL_USER,

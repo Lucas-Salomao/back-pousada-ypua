@@ -11,8 +11,7 @@ import { UsuarioEntity } from "./usuario.entity";
 @Module({
     imports: [TypeOrmModule.forFeature([UsuarioEntity])],
     controllers:[UsuarioController],
-    providers:[UsuarioService, UsuarioRepository, EmailIsUniqueValidator, CPFIsUniqueValidator,RGIsUniqueValidator],
-    exports:[UsuarioService],
+    providers:[UsuarioService, UsuarioRepository, EmailIsUniqueValidator, CPFIsUniqueValidator,RGIsUniqueValidator]
 })
 export class UsuarioModule{
 }

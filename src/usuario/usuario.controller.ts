@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { UsuarioRepository } from "./usuario.repository"
 import { CreateUsuarioDTO } from "./dto/CreateUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
@@ -6,10 +6,9 @@ import { v4 as uuid} from 'uuid'
 import { ShowUsuarioDTO } from "./dto/ShowUsuario.dto";
 import { UpdateUsuarioDTO } from "./dto/UpdateUsuario.dto";
 import { UsuarioService } from "./usuario.service";
-import { HashearSenhaPipe } from "../recursos/pipes/hashear-senha.pipe";
-import { AutenticacaoGuard } from "../autenticacao/autenticacao.guard";
+import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
 
-@UseGuards(AutenticacaoGuard)
+@ApiTags('usuario')
 @Controller('/usuario')
 export class UsuarioController{
 
@@ -19,16 +18,17 @@ export class UsuarioController{
 
     ) {}
 
+    @ApiOperation({summary:'Cria um novo usuario'})
+    @ApiCreatedResponse({description:'Retorna o usuario criado', type: ShowUsuarioDTO})
+    @ApiUnprocessableEntityResponse({description:'Erro de validação'})
     @Post()
-    async createUsuario(
-        @Body() {senha, ...dadosUsuario}:CreateUsuarioDTO,
-        @Body('senha', HashearSenhaPipe) senhaHasheada:string 
-)   {
+    async createUsuario(@Body() dadosUsuario: CreateUsuarioDTO)
+    {
         const usuarioEntity = new UsuarioEntity();
         usuarioEntity.id=uuid();
         usuarioEntity.nome=dadosUsuario.nome;
         usuarioEntity.email=dadosUsuario.email;
-        usuarioEntity.senha=senhaHasheada;
+        usuarioEntity.senha=dadosUsuario.senha;
         usuarioEntity.cpf=dadosUsuario.cpf;
         usuarioEntity.rg=dadosUsuario.rg;
         usuarioEntity.rua=dadosUsuario.rua;
@@ -47,12 +47,14 @@ export class UsuarioController{
         }
     }
 
+    @ApiOperation({summary:'Lista todos os usuarios'})
     @Get()
     async readUsuario(){
         const usuariosSalvos=await this.usuarioService.readUsuario();        
         return usuariosSalvos;
     }
 
+    @ApiOperation({summary:'Atualiza um usuario'})
     @Put('/:id')
     async updateUsuario(@Param('id') id:string, @Body() dadosUsuario:UpdateUsuarioDTO)
     {
@@ -64,6 +66,7 @@ export class UsuarioController{
         }
     }
 
+    @ApiOperation({summary:'Deleta um usuario'})
     @Delete('/:id')
     async deleteUsuario(@Param('id') id: string)
     {

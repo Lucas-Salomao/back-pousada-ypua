@@ -35,5 +35,18 @@ export class UsuarioService{
 
     }
 
+    async buscaPorEmail(email:string){
+        const usuarioEncontrado=await this.usuarioRepository.findOne({
+            where:{
+                email
+            }
+        })
+
+        if(!usuarioEncontrado){
+            throw new Error('Usuario não encontrado');
+        }
+
+        return usuarioEncontrado;
+    }
     
 }

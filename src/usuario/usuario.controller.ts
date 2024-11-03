@@ -1,12 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
-import { UsuarioRepository } from "./usuario.repository"
 import { CreateUsuarioDTO } from "./dto/CreateUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
 import { v4 as uuid} from 'uuid'
 import { ShowUsuarioDTO } from "./dto/ShowUsuario.dto";
 import { UpdateUsuarioDTO } from "./dto/UpdateUsuario.dto";
 import { UsuarioService } from "./usuario.service";
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
+import { ApiCreatedResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
 import { HashearSenhaPipe } from "../recursos/pipes/hashear-senha.pipe";
 import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
@@ -16,9 +15,7 @@ import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 export class UsuarioController{
 
     constructor(
-        private usuarioRepository: UsuarioRepository,
         private usuarioService: UsuarioService
-
     ) {}
 
     @ApiOperation({summary:'Cria um novo usuario'})

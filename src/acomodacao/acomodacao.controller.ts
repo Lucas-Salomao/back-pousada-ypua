@@ -18,7 +18,6 @@ import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 export class AcomodacaoController {
 
     constructor(
-        private acomodacaoRepository: AcomodacaoRepository,
         private acomodacaoService: AcomodacaoService
     ) { }
 
@@ -95,7 +94,7 @@ export class AcomodacaoController {
 
         // Crie as entidades de fotos e associe à acomodação
         acomodacaoEntity.fotos = fotos.map(foto => {
-            const fotoEntity = new FotosAcomodacaoEntity();
+            const fotoEntity = new FotosAcomodacaoEntity({});
             fotoEntity.nome = foto.originalname;
             fotoEntity.tipo = foto.mimetype;
             fotoEntity.imagem = foto.buffer; // Salve o buffer da imagem

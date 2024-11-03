@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+
+actor "Usuário/Administrador" as Admin
+
+rectangle Gerenciar\nUsuários {
+    Admin -- (Criar Usuário)
+    Admin -- (Atualizar Usuário)
+    Admin -- (Excluir Usuário)
+    Admin -- (Consultar Usuário)
+}
+
+rectangle Gerenciar\nHóspedes {
+    Admin -- (Criar Hóspede)
+    Admin -- (Atualizar Hóspede)
+    Admin -- (Excluir Hóspede)
+    Admin -- (Consultar Hóspede)
+}
+
+rectangle Gerenciar\nAcomodações {
+    Admin -- (Criar Acomodação)
+    Admin -- (Atualizar Acomodação)
+    Admin -- (Excluir Acomodação)
+    Admin -- (Consultar Acomodação)
+    Admin -- (Visualizar Detalhes\nde Acomodação)
+}
+
+rectangle Gerenciar\nReservas {
+    Admin -- (Criar Reserva)
+    Admin -- (Atualizar Reserva)
+    Admin -- (Cancelar Reserva)
+    Admin -- (Consultar Reserva)
+    Admin -- (Realizar Check-in)
+    Admin -- (Realizar Check-out)
+}
+
+rectangle Gerar\nRelatórios {
+    Admin -- (Relatório de Reservas)
+    Admin -- (Relatório de Ocupação)
+    Admin -- (Relatório de Receita)
+}
+
+rectangle Configurar\nSistema {
+    Admin -- (Configurar Taxas)
+    Admin -- (Configurar Políticas\nde Cancelamento)
+}
+
+@enduml

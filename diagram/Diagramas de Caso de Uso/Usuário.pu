@@ -1,0 +1,12 @@
+@startuml
+left to right direction
+
+actor Hóspede as Hospede
+
+Hospede -- (Realizar Reserva)
+Hospede -- (Visualizar Reservas)
+Hospede -- (Cancelar Reserva)
+Hospede -- (Visualizar Detalhes de Acomodação)
+Hospede -- (Enviar Mensagem de Contato)
+
+@enduml

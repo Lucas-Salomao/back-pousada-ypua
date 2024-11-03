@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+actor "Sistema Externo" as Sistema
+
+rectangle Pagamento {
+  (Processar Pagamento) -- Sistema
+}
+
+rectangle Email {
+  (Enviar Email) -- Sistema
+}
+
+rectangle Mapa {
+ (Fornecer Dados de Mapa) -- Sistema
+}
+
+
+@enduml

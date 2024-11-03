@@ -1,7 +1,7 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
-import { CPFIsUnique } from "../validator/cpf-is-unique.validator";
-import { RGIsUnique } from "../validator/rg-is-unique.validator";
+import { IsString, IsEmail, MinLength, IsNotEmpty, IsOptional} from "class-validator";
 import { EmailIsUnique } from "../validator/email-is-unique.validator";
+import { RGIsUnique } from "../validator/rg-is-unique.validator";
+import { CPFIsUnique } from "../validator/cpf-is-unique.validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateUsuarioDTO {

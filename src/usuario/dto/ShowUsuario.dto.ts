@@ -1,5 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
 export class ShowUsuarioDTO {
+    constructor(id: string, nome: string, email: string, rg: string, cpf: string, role: string) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.role = role;
+    }
+    
     @ApiProperty({
         type: String,
         description: 'Id do usuário',
@@ -47,13 +56,4 @@ export class ShowUsuarioDTO {
         required: true,
     })
     readonly role: string;
-
-    constructor(id: string, nome: string, email: string, rg: string, cpf: string, role: string) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.rg = rg;
-        this.cpf = cpf;
-        this.role = role;
-    }
 }

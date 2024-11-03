@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { UsuarioRepository } from "./usuario.repository"
 import { CreateUsuarioDTO } from "./dto/CreateUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
@@ -7,7 +7,10 @@ import { ShowUsuarioDTO } from "./dto/ShowUsuario.dto";
 import { UpdateUsuarioDTO } from "./dto/UpdateUsuario.dto";
 import { UsuarioService } from "./usuario.service";
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
+import { HashearSenhaPipe } from "../recursos/pipes/hashear-senha.pipe";
+import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
+@UseGuards(AutenticacaoGuard)
 @ApiTags('usuario')
 @Controller('/usuario')
 export class UsuarioController{
@@ -22,13 +25,15 @@ export class UsuarioController{
     @ApiCreatedResponse({description:'Retorna o usuario criado', type: ShowUsuarioDTO})
     @ApiUnprocessableEntityResponse({description:'Erro de validação'})
     @Post()
-    async createUsuario(@Body() dadosUsuario: CreateUsuarioDTO)
-    {
+    async createUsuario(
+        @Body() {senha, ...dadosUsuario}:CreateUsuarioDTO,
+        @Body('senha', HashearSenhaPipe) senhaHasheada:string 
+)   {
         const usuarioEntity = new UsuarioEntity();
         usuarioEntity.id=uuid();
         usuarioEntity.nome=dadosUsuario.nome;
         usuarioEntity.email=dadosUsuario.email;
-        usuarioEntity.senha=dadosUsuario.senha;
+        usuarioEntity.senha=senhaHasheada;
         usuarioEntity.cpf=dadosUsuario.cpf;
         usuarioEntity.rg=dadosUsuario.rg;
         usuarioEntity.rua=dadosUsuario.rua;

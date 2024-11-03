@@ -1,11 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { HospedeService } from './hospede.service';
 import { UpdateHospedeDTO } from './dto/update-hospede.dto';
 import { CreateHospedeDTO } from './dto/create-hospede.dto';
 import { HospedeEntity } from './hospede.entity';
 import { v4 as uuid } from 'uuid'
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
+@UseGuards(AutenticacaoGuard)
 @ApiTags('hospede')
 @Controller('/hospede')
 export class HospedeController {

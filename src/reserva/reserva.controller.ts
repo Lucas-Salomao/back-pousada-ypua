@@ -1,11 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put, UseGuards } from '@nestjs/common';
 import { ReservaService } from './reserva.service';
 import { CreateReservaDTO } from './dto/create-reserva.dto';
 import { UpdateReservaDTO } from './dto/update-reserva.dto';
 import { ReservaEntity } from './reserva.entity';
 import { CreateReservaFormDataDTO } from './dto/create-reserva-formdata.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
+@UseGuards(AutenticacaoGuard)
 @ApiTags('reserva')
 @Controller('/reserva')
 export class ReservaController {

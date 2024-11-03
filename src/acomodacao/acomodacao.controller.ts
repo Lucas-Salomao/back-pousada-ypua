@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors, Req, HttpException, HttpStatus, NotFoundException, UploadedFiles } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors, Req, HttpException, HttpStatus, NotFoundException, UploadedFiles, UseGuards } from '@nestjs/common';
 import { AcomodacaoRepository } from './acomodacao.repository';
 import { AcomodacaoService } from './acomodacao.service';
 import { UpdateAcomodacaoDTO } from './dto/UpdateAcomodacao.dto';
@@ -10,7 +10,9 @@ import { FotosAcomodacaoEntity } from './fotos.acomodacao.entity';
 import { CreateAcomodacaoFormDataDTO } from './dto/CreateAcomodacaoFormData.dto';
 import { Request } from 'express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
+@UseGuards(AutenticacaoGuard)
 @ApiTags('acomodacao')
 @Controller('/acomodacao')
 export class AcomodacaoController {
@@ -18,7 +20,6 @@ export class AcomodacaoController {
     constructor(
         private acomodacaoRepository: AcomodacaoRepository,
         private acomodacaoService: AcomodacaoService
-
     ) { }
 
     // @Post()

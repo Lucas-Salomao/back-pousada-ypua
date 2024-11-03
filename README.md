@@ -258,11 +258,11 @@ docker run -p 3000:3000 -e PORT=3000 pousada-backend
     Crie um arquivo `.env` na raiz do projeto e defina as seguintes variáveis:
     
     ```
-    DATABASE_HOST=localhost
-    DATABASE_PORT=5432
-    DATABASE_USER=seu_usuario
-    DATABASE_PASSWORD=sua_senha
-    DATABASE_NAME=nome_do_banco
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USER=seu_usuario
+    DB_PASSWORD=sua_senha
+    DB_NAME=nome_do_banco
     PORT=3000
     ```
     

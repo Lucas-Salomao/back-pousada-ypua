@@ -3,6 +3,10 @@ import { AcomodacaoEntity } from "./acomodacao.entity";
 
 @Entity({ name: 'imagens_acomodacao' })
 export class FotosAcomodacaoEntity {
+    constructor(partial: Partial<FotosAcomodacaoEntity>) {
+        Object.assign(this, partial);
+    }
+
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

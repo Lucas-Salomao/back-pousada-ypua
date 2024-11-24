@@ -9,8 +9,7 @@ export class HashearSenhaPipe implements PipeTransform {
   constructor(private configService: ConfigService) { }
 
   async transform(senha: string) {
-    const saltRounds = Number(this.configService.get<number>('SALT_PASSWORD'));
-    const salt = await bcrypt.genSalt(saltRounds)
+    const salt = Number(this.configService.get<string>('SALT_PASSWORD'));
 
     const senhaHasheada = await bcrypt.hash(senha, salt);
 

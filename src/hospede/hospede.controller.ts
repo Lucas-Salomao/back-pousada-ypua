@@ -4,15 +4,18 @@ import { UpdateHospedeDTO } from './dto/update-hospede.dto';
 import { CreateHospedeDTO } from './dto/create-hospede.dto';
 import { HospedeEntity } from './hospede.entity';
 import { v4 as uuid } from 'uuid'
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
 @UseGuards(AutenticacaoGuard)
+@ApiTags('hospede')
 @Controller('/hospede')
 export class HospedeController {
   constructor(
     private readonly hospedeService: HospedeService
   ) { }
 
+  @ApiOperation({ summary: 'Cria um novo hospede' })
   @Post()
   async createHospede(@Body() dadosHospede: CreateHospedeDTO) {
     const hospedeEntity = new HospedeEntity();
@@ -36,12 +39,14 @@ export class HospedeController {
     }
   }
 
+  @ApiOperation({ summary: 'Lista todos os hospedes' })
   @Get()
   async readHospede() {
     const hospedesSalvos = await this.hospedeService.readHospede();
     return hospedesSalvos;
   }
 
+  @ApiOperation({ summary: 'Atualiza um hospede' })
   @Put('/:id')
   async updateHospede(@Param('id') id: string, @Body() dadosHospede: UpdateHospedeDTO) {
     const hospedeAtualizado = await this.hospedeService.updateHospede(id, dadosHospede);
@@ -52,6 +57,7 @@ export class HospedeController {
     }
   }
 
+  @ApiOperation({ summary: 'Deleta um hospede' })
   @Delete('/:id')
   async deleteHospede(@Param('id') id: string) {
     const hospedeDeleted = await this.hospedeService.deleteHospede(id);

@@ -1,41 +1,35 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MapsService } from './maps.service';
-import { ConfigService } from '@nestjs/config';
-
 
 describe('MapsService', () => {
-  let service: MapsService;
-  let configService:ConfigService;
-
+  let mapsService: MapsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MapsService,
-      {
-        provide: ConfigService,
-        useValue: {
-          get: jest.fn(),
-        },
-      }],
+      providers: [
+        MapsService
+      ],
     }).compile();
 
-    service = module.get<MapsService>(MapsService);
-    configService = module.get<ConfigService>(ConfigService);
-
+    mapsService = module.get<MapsService>(MapsService);
   });
 
-  it('deve ser definido', () => {
-    expect(service).toBeDefined();
+  it('deve estar implementado', () => {
+    expect(mapsService).toBeDefined();
   });
 
-  it('deve retornar as configurações do mapa', async () => {
+  describe('readMaps', () => {
+    it('deve retornar apiKey', async () => {
+      const maps = await mapsService.readMaps();
 
-    const googleMapsKeyMock = 'sua_chave_de_api';
-    jest.spyOn(configService, 'get').mockReturnValue(googleMapsKeyMock);
-    const expectedMapsConfig = { apiKey: googleMapsKeyMock };
-    const mapsConfig = await service.readMaps();
+      expect(maps).toEqual({ apiKey: process.env.GOOGLE_MAPS_API_KEY });
+    });
 
-    expect(mapsConfig).toEqual(expectedMapsConfig);
+    it('deve retornar apiKey vazia', async () => {
+      process.env.GOOGLE_MAPS_API_KEY = '';
+      const maps = await mapsService.readMaps();
 
+      expect(maps).toEqual({ apiKey: '' });
+    });
   });
 });

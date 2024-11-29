@@ -9,7 +9,7 @@ import { UpdateUsuarioDTO } from "./dto/UpdateUsuario.dto";
 export class UsuarioService{
     constructor(
         @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: Repository<UsuarioEntity>
+        private readonly usuarioRepository: Repository<UsuarioEntity>,
     ) {}
 
     async createUsuario(usuarioEntity: UsuarioEntity){
@@ -41,6 +41,16 @@ export class UsuarioService{
                 email
             }
         })
+
+        if(!usuarioEncontrado){
+            throw new Error('Usuario não encontrado');
+        }
+
+        return usuarioEncontrado;
+    }
+
+    async findUserById(id:string){
+        const usuarioEncontrado = await this.usuarioRepository.findOneBy({ id });
 
         if(!usuarioEncontrado){
             throw new Error('Usuario não encontrado');

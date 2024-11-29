@@ -2,7 +2,7 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
-export const UserEmail = createParamDecorator(
+export const UserId = createParamDecorator(
   async (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
     const token = extractTokenFromHeader(request);
@@ -17,7 +17,7 @@ export const UserEmail = createParamDecorator(
 
     try {
       const payload = await jwtService.verifyAsync(token);
-      return payload.email;
+      return payload.sub;
     } catch {
       return null;
     }

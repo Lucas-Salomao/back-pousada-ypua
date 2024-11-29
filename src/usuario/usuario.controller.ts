@@ -8,7 +8,7 @@ import { UsuarioService } from "./usuario.service";
 import { ApiCreatedResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from "@nestjs/swagger";
 import { HashearSenhaPipe } from "../recursos/pipes/hashear-senha.pipe";
 import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
-import { UserEmail } from "src/decorators/user.decorator";
+import { UserId } from "src/decorators/user.decorator";
 
 @UseGuards(AutenticacaoGuard)
 @ApiTags('usuario')
@@ -52,8 +52,12 @@ export class UsuarioController{
 
     // Adicione uma rota para buscar o usuario pelo token de acesso
     @Get('/me')
-    async getMe(@UserEmail() email: string){
-        const usuario = await this.usuarioService.buscaPorEmail(email);
+    async getMe(@UserId() id: string){
+        if (!id) {
+            return { error: "Parâmetro id deve ser preenchido!" };
+        }
+
+        const usuario = await this.usuarioService.findUserById(id);
         return { user: usuario };
     }
 

@@ -1,21 +1,47 @@
-# Base da imagem - Node.js
-FROM node:18-alpine
+# Build Stage
+FROM node:18-alpine AS builder
 
-ENV HOST 0.0.0.0
-
-# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
 
-# Instala as dependências
-RUN npm install
+# Install all dependencies (including dev dependencies for build)
+RUN npm ci
 
-# Copia o código da aplicação para o container
+# Copy source code
 COPY . .
 
-# Define a porta de exposição (opcional)
+# Build the application
+RUN npm run build
+
+# Production Stage
+FROM node:18-alpine AS production
+
+# Optional: run with non-root user for better security
+USER node
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm ci --only=production
+
+# Copy built application from builder stage
+COPY --from=builder /app/dist ./dist
+
+# Copy any additional necessary files
+COPY --from=builder /app/nest-cli.json ./
+
+# Environment variables
+ENV NODE_ENV production
+ENV PORT 3000
+ENV HOST 0.0.0.0
+
+# Expose port
 EXPOSE 3000
 
-# Comando para executar a aplicação
-CMD ["npm", "run", "start:dev"] 
+# Start the server using production build
+CMD [ "node", "dist/main.js" ]

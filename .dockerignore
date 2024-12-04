@@ -1,5 +1,26 @@
-.git
+# Dependencies
 node_modules
-npm-debug.log*
-yarn-error.log*
-.env*
+npm-debug.log
+
+# Build output
+dist
+
+# Version control
+.git
+.gitignore
+
+# IDE files
+.idea
+.vscode
+
+# Environment files
+.env
+.env.*
+
+# Tests
+coverage
+.nyc_output
+
+# OS files
+.DS_Store
+Thumbs.db

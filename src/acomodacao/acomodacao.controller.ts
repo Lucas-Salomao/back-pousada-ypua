@@ -12,7 +12,6 @@ import { Request } from 'express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
-@UseGuards(AutenticacaoGuard)
 @ApiTags('acomodacao')
 @Controller('/acomodacao')
 export class AcomodacaoController {
@@ -60,6 +59,7 @@ export class AcomodacaoController {
     // }
 
     @ApiOperation({ summary: 'Cria uma nova acomodação' })
+    @UseGuards(AutenticacaoGuard)
     @Post()
     @UseInterceptors(FilesInterceptor('fotos')) // Permita múltiplos arquivos no campo 'fotos'
     //async createAcomodacao(@Req() dadosAcomodacao: any, @UploadedFiles() fotos: Array<Express.Multer.File>): Promise<any> {
@@ -127,6 +127,7 @@ export class AcomodacaoController {
     }
 
     @ApiOperation({ summary: 'Deleta uma acomodação' })
+    @UseGuards(AutenticacaoGuard)
     @Delete('/:id')
     async deleteAcomodacao(@Param('id') id: string) {
         const acomodacaoDeleted = await this.acomodacaoService.deleteAcomodacao(id);

@@ -10,7 +10,7 @@ import { HashearSenhaPipe } from "../recursos/pipes/hashear-senha.pipe";
 import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 import { UserEmail } from "src/decorators/user.decorator";
 
-@UseGuards(AutenticacaoGuard)
+
 @ApiTags('usuario')
 @Controller('/usuario')
 export class UsuarioController{
@@ -58,6 +58,7 @@ export class UsuarioController{
     }
 
     @ApiOperation({summary:'Lista todos os usuarios'})
+    @UseGuards(AutenticacaoGuard)
     @Get()
     async readUsuario(){
         const usuariosSalvos=await this.usuarioService.readUsuario();        
@@ -65,6 +66,7 @@ export class UsuarioController{
     }
 
     @ApiOperation({summary:'Atualiza um usuario'})
+    @UseGuards(AutenticacaoGuard)
     @Put('/:id')
     async updateUsuario(@Param('id') id:string, @Body() dadosUsuario:UpdateUsuarioDTO)
     {
@@ -77,6 +79,7 @@ export class UsuarioController{
     }
 
     @ApiOperation({summary:'Deleta um usuario'})
+    @UseGuards(AutenticacaoGuard)
     @Delete('/:id')
     async deleteUsuario(@Param('id') id: string)
     {

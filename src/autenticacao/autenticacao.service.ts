@@ -4,8 +4,10 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
 export interface UsuarioPayload {
-  sub: string;
-  nomeUsuario: string;
+  userId: string;
+  nome: string;
+  email:string;
+  role: string;
 }
 
 
@@ -31,8 +33,10 @@ export class AutenticacaoService {
       }
 
       const payload: UsuarioPayload = {
-        sub: usuario.id,
-        nomeUsuario: usuario.nome,
+        userId: usuario.id,
+        nome: usuario.nome,
+        email:usuario.email,
+        role:usuario.role,
       };
       
       return {

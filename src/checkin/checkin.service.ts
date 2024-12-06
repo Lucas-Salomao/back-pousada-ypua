@@ -10,13 +10,13 @@ export class CheckinService {
     try {
       const reserva = await this.reservaRepository.searchByCode(codigo);
       if (!reserva) {
-        throw new NotFoundException('Reserva n„o encontrada.');
+        throw new NotFoundException('Reserva n√£o encontrada.');
       }
 
       const hoje = new Date().toISOString().split('T')[0];
 
       if (reserva.dataEntrada != hoje) {
-        throw new BadRequestException('A data do check-in È inv·lida.');
+        throw new BadRequestException('A data do check-in √© inv√°lida.');
       }
 
       reserva.status = StatusReserva.EM_PROCESSAMENTO;

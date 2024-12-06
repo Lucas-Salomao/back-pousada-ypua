@@ -7,13 +7,12 @@ import { CreateReservaFormDataDTO } from './dto/create-reserva-formdata.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AutenticacaoGuard } from '../autenticacao/autenticacao.guard';
 
-@UseGuards(AutenticacaoGuard)
 @ApiTags('reserva')
 @Controller('/reserva')
 export class ReservaController {
   constructor(private readonly reservaService: ReservaService) { }
 
-  @ApiOperation({ summary: 'Cria uma nova reserva' })
+  @ApiOperation({ summary: 'Criar uma nova reserva' })
   @Post()
   async createReserva(@Body() createReservaFormDataDTO: CreateReservaFormDataDTO) {
     const reservaCriada = await this.reservaService.createReserva(
@@ -22,14 +21,16 @@ export class ReservaController {
     return reservaCriada;
   }
 
-  @ApiOperation({ summary: 'Lista todas as reservas' })
+  @ApiOperation({ summary: 'Listar todas as reservas' })
+  @UseGuards(AutenticacaoGuard)
   @Get()
   async readReserva() {
     const reservasSalvos = await this.reservaService.readReserva();
     return reservasSalvos;
   }
 
-  @ApiOperation({ summary: 'Atualiza uma reserva' })
+  @ApiOperation({ summary: 'Atualizar uma reserva' })
+  @UseGuards(AutenticacaoGuard)
   @Put('/:id')
   async updateReserva(@Param('id') id: string, @Body() dadosReserva: UpdateReservaDTO) {
     const reservaAtualizado = await this.reservaService.updateReserva(id, dadosReserva);
@@ -41,6 +42,7 @@ export class ReservaController {
   }
 
   @ApiOperation({ summary: 'Deleta uma reserva' })
+  @UseGuards(AutenticacaoGuard)
   @Delete('/:id')
   async deleteReserva(@Param('id') id: string) {
     const reservaDeleted = await this.reservaService.deleteReserva(id);
@@ -51,14 +53,16 @@ export class ReservaController {
     }
   }
 
-  @ApiOperation({ summary: 'Busca uma reserva pelo id' })
+  @ApiOperation({ summary: 'Buscar uma reserva pelo nome' })
+  @UseGuards(AutenticacaoGuard)
   @Get('nome/:nome')
   async findReservaByName(@Param('nome') nome: string): Promise<ReservaEntity[]> {
     const reservas = await this.reservaService.findReservaByName(nome);
     return reservas;
   }
 
-  @ApiOperation({ summary: 'Busca uma reserva pelo id' })
+  @ApiOperation({ summary: 'Buscar uma reserva pelo cpf' })
+  @UseGuards(AutenticacaoGuard)
   @Get('cpf/:cpf')
   async findReservaByCpf(@Param('cpf') cpf: string): Promise<ReservaEntity[]> {
     const reservas = await this.reservaService.findReservaByCpf(cpf);

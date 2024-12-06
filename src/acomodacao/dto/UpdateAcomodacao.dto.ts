@@ -1,4 +1,4 @@
-import { IsInt, IsString, IsOptional, IsBoolean } from "class-validator";
+import { IsInt, IsString, IsOptional, IsBoolean, IsCurrency } from "class-validator";
 import { NumberIsUnique } from "../validator/numero-is-unique.validator";
 import { Exclude } from "class-transformer";
 import { ApiProperty } from "@nestjs/swagger";
@@ -36,15 +36,15 @@ export class UpdateAcomodacaoDTO {
   @NumberIsUnique({message:'Ja existe uma acomodação com este numero'})
   numero: number;
 
-  @ApiProperty({
-    type: String,
-    description: 'Categoria da acomodação',
-    example: 'Luxo',
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  categoria: string;
+  // @ApiProperty({
+  //   type: String,
+  //   description: 'Categoria da acomodação',
+  //   example: 'Luxo',
+  //   required: false,
+  // })
+  // @IsOptional()
+  // @IsString()
+  // categoria: string;
 
   @ApiProperty({
     type: Number,
@@ -108,17 +108,67 @@ export class UpdateAcomodacaoDTO {
   @IsBoolean()
   comBanheira: boolean;
 
+  // @ApiProperty({
+  //   type: Boolean,
+  //   description: 'Com bidê',
+  //   example: false,
+  //   required: false,
+  // })
+  // @IsOptional()
+  // @IsBoolean()
+  // comBide: boolean;
+
   @ApiProperty({
     type: Boolean,
-    description: 'Com bidê',
-    example: false,
-    required: false,
+    description: 'Com toalhas',
+    example: true,
+    required: true,
   })
-  @IsOptional()
   @IsBoolean()
-  comBide: boolean;
+  @IsOptional()
+  comToalhas: boolean;
 
-  // Optional Additional Amenities
+  @ApiProperty({
+    type: Boolean,
+    description: 'Com secador',
+    example: true,
+    required: true,
+  })
+  @IsBoolean()
+  @IsOptional()
+  comSecador: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'Com acessibilidade',
+    example: true,
+    required: true,
+  })
+  @IsBoolean()
+  @IsOptional()
+  comAcessibilidade: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'Com cozinha',
+    example: false,
+    required: true,
+  })
+  @IsBoolean()
+  @IsOptional()
+  comCozinha: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'Com restaurante',
+    example: false,
+    required: true,
+  })
+  @IsBoolean()
+  @IsOptional()
+  comRestaurante: boolean;
+
+  
   @ApiProperty({
     type: Boolean,
     description: 'Com ar condicionado',
@@ -159,15 +209,15 @@ export class UpdateAcomodacaoDTO {
   @IsInt()
   tamanhoTV: number;
 
-  @ApiProperty({
-    type: String,
-    description: 'Canais de TV',
-    example: 'Globo, SBT, Record',
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  canaisTV: string;
+  // @ApiProperty({
+  //   type: String,
+  //   description: 'Canais de TV',
+  //   example: 'Globo, SBT, Record',
+  //   required: false,
+  // })
+  // @IsOptional()
+  // @IsString()
+  // canaisTV: string;
 
   @ApiProperty({
     type: Boolean,
@@ -179,25 +229,25 @@ export class UpdateAcomodacaoDTO {
   @IsBoolean()
   comWifi: boolean;
 
-  @ApiProperty({
-    type: String,
-    description: 'Velocidade do Wi-Fi',
-    example: '100MB',
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  velocidadeWifi: string;
+  // @ApiProperty({
+  //   type: String,
+  //   description: 'Velocidade do Wi-Fi',
+  //   example: '100MB',
+  //   required: false,
+  // })
+  // @IsOptional()
+  // @IsString()
+  // velocidadeWifi: string;
 
-  @ApiProperty({
-    type: Boolean,
-    description: 'Wi-Fi pago',
-    example: false,
-    required: false,
-  })
-  @IsOptional()
-  @IsBoolean()
-  wifiPago: boolean;
+  // @ApiProperty({
+  //   type: Boolean,
+  //   description: 'Wi-Fi pago',
+  //   example: false,
+  //   required: false,
+  // })
+  // @IsOptional()
+  // @IsBoolean()
+  // wifiPago: boolean;
 
   @ApiProperty({
     type: Boolean,
@@ -207,7 +257,7 @@ export class UpdateAcomodacaoDTO {
   })
   @IsOptional()
   @IsBoolean()
-  comMiniBar: boolean;
+  comFrigobar: boolean;
 
   @ApiProperty({
     type: Boolean,
@@ -219,15 +269,15 @@ export class UpdateAcomodacaoDTO {
   @IsBoolean()
   comCofre: boolean;
 
-  @ApiProperty({
-    type: Boolean,
-    description: 'Com telefone',
-    example: false,
-    required: false,
-  })
-  @IsOptional()
-  @IsBoolean()
-  comTelefone: boolean;
+  // @ApiProperty({
+  //   type: Boolean,
+  //   description: 'Com telefone',
+  //   example: false,
+  //   required: false,
+  // })
+  // @IsOptional()
+  // @IsBoolean()
+  // comTelefone: boolean;
 
   @ApiProperty({
     type: Boolean,
@@ -241,21 +291,21 @@ export class UpdateAcomodacaoDTO {
 
   @ApiProperty({
     type: String,
-    description: 'Vista da acomodação',
-    example: 'Praia',
-    required: false,
+    description: 'Descrição da acomodação',
+    example: 'Quarto de casal com cama de casal, banheiro privativo, ar condicionado, TV, wifi, frigobar e varanda',
+    required: true,
   })
-  @IsOptional()
   @IsString()
-  vista: string;
+  @IsOptional()
+  descricao: string;
 
   @ApiProperty({
-    type: String,
-    description: 'Descrição da acomodação',
-    example: 'Quarto de casal com vista para o mar',
-    required: false,
+    type: Number,
+    description: 'Preço da acomodação',
+    example: 150.00,
+    required: true,
   })
   @IsOptional()
-  @IsInt()
+  @IsCurrency()
   preco: number;
 }

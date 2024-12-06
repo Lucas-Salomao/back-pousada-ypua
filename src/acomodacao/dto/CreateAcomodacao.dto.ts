@@ -250,7 +250,7 @@ export class CreateAcomodacaoDTO {
   })
   @IsString()
   @IsNotEmpty()
-  descriacao: string;
+  descricao: string;
 
   @ApiProperty({
     type: Number,

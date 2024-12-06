@@ -1,4 +1,4 @@
-import { Injectable, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Injectable, NotFoundException, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { AcomodacaoEntity } from './acomodacao.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -24,9 +24,30 @@ export class AcomodacaoService {
     }
 
     async updateAcomodacao(id: string, acomodacaoEntity: UpdateAcomodacaoDTO) {
+        // Verifica se a acomodação existe
+        const acomodacaoExistente = await this.acomodacaoRepository.findOne({ 
+            where: { id },
+            relations: ['fotos']
+        });
+        
+        if (!acomodacaoExistente) {
+            throw new NotFoundException('Acomodação não encontrada');
+        }
+    
+        // Atualiza os dados
         await this.acomodacaoRepository.update(id, acomodacaoEntity);
-
+        
+        // Retorna a acomodação atualizada
+        return await this.acomodacaoRepository.findOne({
+            where: { id },
+            relations: ['fotos']
+        });
     }
+
+    // async updateAcomodacao(id: string, acomodacaoEntity: UpdateAcomodacaoDTO) {
+    //     await this.acomodacaoRepository.update(id, acomodacaoEntity);
+
+    // }
 
     // async deleteAcomodacao(id: string) {
     //     await this.acomodacaoRepository.delete(id);

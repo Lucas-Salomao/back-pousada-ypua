@@ -20,44 +20,6 @@ export class AcomodacaoController {
         private acomodacaoService: AcomodacaoService
     ) { }
 
-    // @Post()
-    // async createAcomodacao(@Body() dadosAcomodacao: CreateAcomodacaoDTO) {
-
-    //     const acomodacaoEntity = new AcomodacaoEntity();
-    //     acomodacaoEntity.id = uuid();
-    //     // Set all properties from the DTO to the entity
-    //     acomodacaoEntity.nome = dadosAcomodacao.nome;
-    //     acomodacaoEntity.numero = dadosAcomodacao.numero;
-    //     acomodacaoEntity.categoria = dadosAcomodacao.categoria;
-    //     acomodacaoEntity.capacidade = dadosAcomodacao.capacidade;
-    //     acomodacaoEntity.quantidadeCamas = dadosAcomodacao.quantidadeCamas;
-    //     acomodacaoEntity.tipoCama = dadosAcomodacao.tipoCama;
-    //     acomodacaoEntity.tipoBanheiro = dadosAcomodacao.tipoBanheiro;
-    //     acomodacaoEntity.comChuveiro = dadosAcomodacao.comChuveiro;
-    //     acomodacaoEntity.comBanheira = dadosAcomodacao.comBanheira;
-    //     acomodacaoEntity.comBide = dadosAcomodacao.comBide;
-    //     acomodacaoEntity.comArCondicionado = dadosAcomodacao.comArCondicionado;
-    //     acomodacaoEntity.comAquecedor = dadosAcomodacao.comAquecedor;
-    //     acomodacaoEntity.comTV = dadosAcomodacao.comTV;
-    //     acomodacaoEntity.tamanhoTV = dadosAcomodacao.tamanhoTV;
-    //     acomodacaoEntity.canaisTV = dadosAcomodacao.canaisTV;
-    //     acomodacaoEntity.comWifi = dadosAcomodacao.comWifi;
-    //     acomodacaoEntity.velocidadeWifi = dadosAcomodacao.velocidadeWifi;
-    //     acomodacaoEntity.wifiPago = dadosAcomodacao.wifiPago;
-    //     acomodacaoEntity.comMiniBar = dadosAcomodacao.comMiniBar;
-    //     acomodacaoEntity.comCofre = dadosAcomodacao.comCofre;
-    //     acomodacaoEntity.comTelefone = dadosAcomodacao.comTelefone;
-    //     acomodacaoEntity.comVaranda = dadosAcomodacao.comVaranda;
-    //     acomodacaoEntity.vista = dadosAcomodacao.vista;
-    //     acomodacaoEntity.preco = dadosAcomodacao.preco;
-
-    //     this.acomodacaoService.createAcomodacao(acomodacaoEntity);
-    //     return {
-    //         usuario: acomodacaoEntity,
-    //         message: 'acomodação criada com sucesso!'
-    //     }
-    // }
-
     @ApiOperation({ summary: 'Cria uma nova acomodação' })
     @UseGuards(AutenticacaoGuard)
     @Post()

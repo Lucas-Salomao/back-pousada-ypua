@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../app.module';
 import { UsuarioService } from '../usuario/usuario.service';
 import { v4 as uuid } from 'uuid';
-import { HashearSenhaPipe } from 'src/recursos/pipes/hashear-senha.pipe';
+import { HashearSenhaPipe } from '../recursos/pipes/hashear-senha.pipe';
 import { ConfigService } from '@nestjs/config/dist/config.service';
-import { UsuarioEntity } from 'src/usuario/usuario.entity';
+import { UsuarioEntity } from '../usuario/usuario.entity';
 
 async function bootstrap() {
   const app = await NestFactory.createApplicationContext(AppModule);

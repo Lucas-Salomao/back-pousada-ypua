@@ -30,4 +30,15 @@ export class HospedeService {
         await this.hospedeRepository.delete(id);
 
     }
+
+    async findByCPF(cpf: string) {
+        const hospede = await this.hospedeRepository.findOne({
+            where: { cpf }
+        });
+        return hospede;
+    }
+
+    async findByEmail(email: string): Promise<HospedeEntity | undefined> {
+        return this.hospedeRepository.findOne({ where: { email } });
+      }
 }

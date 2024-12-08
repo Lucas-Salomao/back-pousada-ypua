@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards, NotFoundException } from '@nestjs/common';
 import { HospedeService } from './hospede.service';
 import { UpdateHospedeDTO } from './dto/update-hospede.dto';
 import { CreateHospedeDTO } from './dto/create-hospede.dto';
@@ -46,6 +46,13 @@ export class HospedeController {
     return hospedesSalvos;
   }
 
+  @ApiOperation({ summary: 'Busca hospede por CPF' })
+  @Get('/cpf/:cpf')
+  async getHospedeByCPF(@Param('cpf') cpf: string) {
+    const hospede = await this.hospedeService.findByCPF(cpf);
+    return hospede;
+  }
+
   @ApiOperation({ summary: 'Atualiza um hospede' })
   @Put('/:id')
   async updateHospede(@Param('id') id: string, @Body() dadosHospede: UpdateHospedeDTO) {
@@ -66,5 +73,15 @@ export class HospedeController {
       usuario: hospedeDeleted,
       message: 'hospede removido com sucesso!'
     }
+  }
+
+  @ApiOperation({ summary: 'Busca hóspede pelo e-mail' })
+  @Get('/email/:email')
+  async findByEmail(@Param('email') email: string) {
+    const hospede = await this.hospedeService.findByEmail(email);
+    if (!hospede) {
+      throw new NotFoundException('Hóspede não encontrado.');
+    }
+    return hospede;
   }
 }

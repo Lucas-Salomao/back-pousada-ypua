@@ -75,9 +75,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comChuveiro: string;
+    @IsBoolean()
+    @IsOptional()
+    comChuveiro: boolean;
 
     @ApiProperty({
         type: String,
@@ -85,9 +85,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comBanheira: string;
+    @IsBoolean()
+    @IsOptional()
+    comBanheira: boolean;
 
     //   @IsString()
     //   @IsNotEmpty()
@@ -99,9 +99,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comToalhas: string;
+    @IsBoolean()
+    @IsOptional()
+    comToalhas: boolean;
 
     @ApiProperty({
         type: String,
@@ -109,9 +109,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comSecador: string;
+    @IsBoolean()
+    @IsOptional()
+    comSecador: boolean;
 
     @ApiProperty({
         type: String,
@@ -119,9 +119,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comAcessibilidade: string;
+    @IsBoolean()
+    @IsOptional()
+    comAcessibilidade: boolean;
 
     @ApiProperty({
         type: String,
@@ -129,19 +129,19 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comCozinha: string;
+    @IsBoolean()
+    @IsOptional()
+    comCozinha: boolean;
 
     @ApiProperty({
         type: String,
-        description: 'Comodidades Básicas',
+        description: 'Com restaurante',
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comRestaurante: string;
+    @IsBoolean()
+    @IsOptional()
+    comRestaurante: boolean;
 
     // Comodidades Adicionais
     @ApiProperty({
@@ -150,9 +150,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comArCondicionado: string;
+    @IsBoolean()
+    @IsOptional()
+    comArCondicionado: boolean;
 
     @ApiProperty({
         type: String,
@@ -160,9 +160,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comAquecedor: string;
+    @IsBoolean()
+    @IsOptional()
+    comAquecedor: boolean;
 
     @ApiProperty({
         type: String,
@@ -170,9 +170,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comTV: string;
+    @IsBoolean()
+    @IsOptional()
+    comTV: boolean;
 
     @ApiProperty({
         type: String,
@@ -194,9 +194,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comWifi: string;
+    @IsBoolean()
+    @IsOptional()
+    comWifi: boolean;
 
     // @IsString()
     // @IsNotEmpty()
@@ -212,9 +212,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comFrigobar: string;
+    @IsBoolean()
+    @IsOptional()
+    comFrigobar: boolean;
 
     @ApiProperty({
         type: String,
@@ -222,9 +222,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comCofre: string;
+    @IsBoolean()
+    @IsOptional()
+    comCofre: boolean;
 
     // @IsString()
     // @IsNotEmpty()
@@ -236,9 +236,9 @@ export class CreateAcomodacaoFormDataDTO {
         example: 'Sim',
         required: true,
     })
-    @IsString()
-    @IsNotEmpty()
-    comVaranda: string;
+    @IsBoolean()
+    @IsOptional()
+    comVaranda: boolean;
 
     @ApiProperty({
         type: String,

@@ -8,7 +8,7 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors: {
-      origin: ['http://localhost:8080'], // Domínios permitidos
+      origin: ['0.0.0.0'], // Domínios permitidos
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Métodos HTTP permitidos
       allowedHeaders: 'Content-Type, Accept', // Cabeçalhos permitidos
     } as CorsOptions, // Adicione a tipagem para evitar erros
@@ -33,7 +33,7 @@ async function bootstrap() {
 
   useContainer(app.select(AppModule),{fallbackOnErrors:true});
   app.enableCors();
-  const port = process.env.PORT || 3000;
-  await app.listen(port, '0.0.0.0');
+  // const port = process.env.PORT || 3000;
+  await app.listen(3000, '0.0.0.0');
 }
 bootstrap();

@@ -13,10 +13,6 @@ RUN npm install
 # Copiar o resto do código fonte
 COPY . .
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f4842ed1d8098b05e48b1e284bedfaf89713d777
 # Run the web service on container startup.
 CMD [ "npm", "run", "start:dev" ]
 

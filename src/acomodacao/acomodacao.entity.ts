@@ -93,7 +93,7 @@ export class AcomodacaoEntity {
     @Column({ name: "com_varanda", nullable: false })
     comVaranda: boolean;
 
-    @Column({ name: "descricao", length: 500, nullable: false })
+    @Column({ name: "descricao", length: 1000, nullable: false })
     descricao: string; // Descrição da vista
 
     @Column({ name: "preco", nullable: false, type: 'float'})

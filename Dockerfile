@@ -13,11 +13,9 @@ RUN npm install
 # Copiar o resto do código fonte
 COPY . .
 
-# Build the application
-RUN npm run build
 
 # Run the web service on container startup.
-CMD [ "npm", "run", "start:prod" ]
+CMD [ "npm", "run", "start:dev" ]
 
 # # Use the official Node.js runtime as the base image
 # FROM node:18-alpine AS builder

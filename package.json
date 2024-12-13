@@ -19,7 +19,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm-ts-node-esm --dataSource src/db/data-source-cli.ts",
-    "typeorm-with-bug": "npm run build && npx typeorm -d dist/db/data-source-cli.js",
+    "typeorm-migrate": "npm run build && npx typeorm -d dist/db/data-source-cli.js migration:run",
     "createAdmin": "npm run build && node dist/config/init-admin.js"
   },
   "dependencies": {

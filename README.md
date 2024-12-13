@@ -137,59 +137,75 @@ O sistema utiliza as seguintes entidades para representar os dados:
   <img src="./diagram/arquitetura-DER.drawio.png" alt="Diagrama DER">
 </p>
 
-## Configuração do Banco de Dados
+## Como Executar o Projeto
 
-Este projeto utiliza Docker Compose para configurar o banco de dados PostgreSQL e o PgAdmin4.
+**Pré-requisitos:**
 
-1. **Crie um arquivo docker-compose.yml na raiz do projeto com o seguinte conteúdo:**
+- Node.js e npm instalados.
 
-```yaml
-version: '3.1'
+**Passos:**
 
-services:
-  db:
-    image: postgres
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: ypua
-    networks:
-      - postgres-compose-network
+1. **Clone o repositório do projeto:**
+    
+    ```bash
+    git clone <URL_DO_REPOSITORIO>
+    ```
+    
+2. **Instale as dependências:**
+    
+    ```bash
+    cd <PASTA_DO_PROJETO>
+    npm install
+    ```
+    
+3. **Configure as variáveis de ambiente:**
+    
+    Crie um arquivo `.env` na raiz do projeto e defina as seguintes variáveis:
+    
+    ```
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USER=postgres
+    DB_PASSWORD=root
+    DB_NAME=ypua
+    PORT=3000
+    SALT_PASSWORD=10
+    JWT_SECRET=secret
+    ```
 
-  db-admin:
-    image: dpage/pgadmin4
-    ports:
-      - 15432:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "root@root.com"
-      PGADMIN_DEFAULT_PASSWORD: "root"
-    depends_on:
-      - db
-    networks:
-      - postgres-compose-network
-
-networks:
-  postgres-compose-network:
-    driver: bridge
-
-```
-
-2. **Suba os serviços do Docker Compose:**
+4. **Suba os serviços do Docker Compose:**
 
 ```bash
 docker-compose up -d
 
 ```
 
-3. **Acesse o PgAdmin4 em seu navegador:**
-
+5. **Execute as migrations do banco de dados:**
+    
+```bash
+npm run typeorm-migrate
 ```
-http://localhost:15432/
 
+6. **Criar um usuário admin local:**
+   1. Credenciais:
+      - email: admin@example.com
+      - senha: admin123
+```bash
+npm run createAdmin
 ```
+    
+7. **Inicie a aplicação:**
+    
+```bash
+# development
+$ npm run start
 
-4. **Conecte-se ao banco de dados `ypua` utilizando as credenciais definidas no arquivo docker-compose.yml.**
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
 
 ## Dockerização do Backend
 
@@ -230,62 +246,7 @@ docker build -t pousada-backend .
 
 ```bash
 docker run -p 3000:3000 -e PORT=3000 pousada-backend
-```
-
-## Como Executar o Projeto
-
-**Pré-requisitos:**
-
-- Node.js e npm (ou yarn) instalados.
-
-**Passos:**
-
-1. **Clone o repositório do projeto:**
-    
-    ```bash
-    git clone <URL_DO_REPOSITORIO>
-    ```
-    
-2. **Instale as dependências:**
-    
-    ```bash
-    cd <PASTA_DO_PROJETO>
-    npm install
-    ```
-    
-3. **Configure as variáveis de ambiente:**
-    
-    Crie um arquivo `.env` na raiz do projeto e defina as seguintes variáveis:
-    
-    ```
-    DB_HOST=localhost
-    DB_PORT=5432
-    DB_USER=seu_usuario
-    DB_PASSWORD=sua_senha
-    DB_NAME=nome_do_banco
-    PORT=3000
-    ```
-    
-4. **Execute as migrations do banco de dados:**
-    
-    ```bash
-    npm run typeorm migration:run
-    
-    ```
-    
-5. **Inicie a aplicação:**
-    
-    ```bash
-    # development
-    $ npm run start
-
-    # watch mode
-    $ npm run start:dev
-
-    # production mode
-    $ npm run start:prod
-    ```
-    
+```    
 
 ## Documentação da API
 
